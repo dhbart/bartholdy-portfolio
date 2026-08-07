@@ -1,0 +1,102 @@
+/**
+ * ======================================================
+ * CSS Custom Properties (Design Tokens)
+ * ======================================================
+ *
+ * Este arquivo documenta todas as variáveis utilizadas
+ * pela aplicação.
+ *
+ * Os valores são definidos em:
+ *  - themes/_light.scss
+ *  - themes/_dark.scss
+ *
+ * Nunca utilize cores fixas (#FFF, rgb...) nos componentes.
+ * Sempre utilize var(--nome-da-variavel).
+ * ======================================================
+ */
+
+/* ===========================
+   Colors
+=========================== */
+
+:root {
+  --background: ;
+
+  --surface: ;
+  --surface-hover: ;
+
+  --text-primary: ;
+  --text-secondary: ;
+
+  --primary: ;
+  --primary-hover: ;
+
+  --border: ;
+
+  --success: ;
+  --warning: ;
+  --danger: ;
+
+  /* ===========================
+     Typography
+  =========================== */
+
+  --font-family: ;
+
+  --font-size-xs: ;
+  --font-size-sm: ;
+  --font-size-md: ;
+  --font-size-lg: ;
+  --font-size-xl: ;
+  --font-size-2xl: ;
+  --font-size-3xl: ;
+
+  /* ===========================
+     Font Weight
+  =========================== */
+
+  --font-light: ;
+  --font-normal: ;
+  --font-medium: ;
+  --font-semibold: ;
+  --font-bold: ;
+
+  /* ===========================
+     Spacing
+  =========================== */
+
+  --space-1: ;
+  --space-2: ;
+  --space-3: ;
+  --space-4: ;
+  --space-5: ;
+  --space-6: ;
+  --space-8: ;
+  --space-10: ;
+  --space-12: ;
+  --space-16: ;
+
+  /* ===========================
+     Border Radius
+  =========================== */
+
+  --radius-sm: ;
+  --radius-md: ;
+  --radius-lg: ;
+  --radius-xl: ;
+
+  /* ===========================
+     Shadows
+  =========================== */
+
+  --shadow-sm: ;
+  --shadow-md: ;
+  --shadow-lg: ;
+
+  /* ===========================
+     Animation
+  =========================== */
+
+  --transition-fast: ;
+  --transition-normal: ;
+}

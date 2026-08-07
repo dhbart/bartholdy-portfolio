@@ -1,0 +1,31 @@
+.header {
+    border-bottom: 1px solid var(--border);
+}
+
+.header__navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72px;
+}
+
+.header__menu {
+    display: flex;
+    gap: var(--space-5);
+    align-items: center;
+}
+
+.header__logo {
+    font-weight: var(--font-bold);
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+}
+
+.header__menu a {
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+}
+
+.header__menu a:hover {
+    color: var(--primary);
+}

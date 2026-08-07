@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/base/reset';
+@use './styles/abstracts/tokens';
+@use './styles/themes/light';
+@use './styles/base/globals';

@@ -1,0 +1,16 @@
+body {
+  background: var(--background);
+  color: var(--text-primary);
+
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+
+  transition:
+    background var(--transition-normal),
+    color var(--transition-normal);
+}
+
+.container {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}

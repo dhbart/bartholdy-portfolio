@@ -1,0 +1,31 @@
+<header class="header">
+
+    <div class="container">
+
+        <nav class="header__navbar">
+
+            <a class="header__logo" routerLink="/">
+                Daniel Bartholdy
+            </a>
+
+            <ul class="header__menu">
+                @for (item of navigation; track item.route) {
+                  <li>
+                    <a [href]="item.route">
+                      {{ item.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+
+            <button class="header__theme-toggle">
+
+                🌙
+
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>

@@ -1,0 +1,55 @@
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero__content">
+
+            <span class="hero__greeting">
+
+                {{ hero.greeting }}
+
+            </span>
+
+            <h1 class="hero__title">
+
+                {{ hero.name }}
+
+            </h1>
+
+            <h2 class="hero__subtitle">
+
+                {{ hero.title }}
+
+            </h2>
+
+            <p class="hero__description">
+
+                {{ hero.description }}
+
+            </p>
+
+            <div class="hero__actions">
+
+                <a
+                    class="hero__button hero__button--primary"
+                    [href]="hero.actions.primary.link">
+
+                    {{ hero.actions.primary.label }}
+
+                </a>
+
+                <a
+                    class="hero__button hero__button--secondary"
+                    [href]="hero.actions.secondary.link">
+
+                    {{ hero.actions.secondary.label }}
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
