@@ -1,0 +1,39 @@
+/* Shared visual primitives. Components keep their BEM classes for structure. */
+.section-title {
+  margin-bottom: var(--space-6);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: var(--font-bold);
+  line-height: 1.15;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .9rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  transition: all var(--transition-fast);
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}

@@ -10,8 +10,9 @@
 
             <ul class="header__menu">
                 @for (item of navigation; track item.route) {
-                  <li>
-                    <a [href]="item.route">
+                  <li class="header__menu-item">
+                    <a class="header__menu-link"
+                       [href]="item.route">
                       {{ item.label }}
                     </a>
                   </li>

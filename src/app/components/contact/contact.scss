@@ -1,0 +1,9 @@
+.contact {
+  padding-block: var(--space-16);
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}

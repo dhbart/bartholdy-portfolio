@@ -1,11 +1,5 @@
 .about {
-  padding-block: var(--space-12);
-}
-
-.about__title {
-  margin-bottom: var(--space-6);
-
-  font-size: var(--font-size-2xl);
+  padding-block: var(--space-16);
 }
 
 .about__content {
@@ -18,7 +12,4 @@
 }
 
 .about__content p {
-  color: var(--text-secondary);
-
-  line-height: 1.8;
 }

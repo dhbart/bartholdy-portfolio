@@ -1,16 +1,17 @@
 export const projects = [
   {
     id: 'portfolio',
-
+    title: 'Bartholdy Portfolio',
     featured: true,
 
-    title: 'Bartholdy Portfolio',
+    headline: 'A modern portfolio built with Angular 22.',
 
     description:
-      'Personal portfolio developed with Angular 22 using Standalone Components.',
+      'Personal portfolio inspired by modern developer websites.',
 
     image: "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png",
-    //'./../images/image_placeholder.png',
+    //image: '/images/projects/movie-api.png',
+
 
     technologies: [
       'Angular',
@@ -18,7 +19,14 @@ export const projects = [
       'SCSS'
     ],
 
-    github: '#'
+    challenge:
+      'Create a professional portfolio while applying modern Angular concepts.',
+
+    solution:
+      'The application was built with Standalone Components, the new Control Flow syntax, a reusable Design System and a component-based architecture.',
+
+    github: '#',
+    demo: '#'
   },
 
   {
@@ -27,6 +35,8 @@ export const projects = [
     featured: false,
 
     title: 'Movie API',
+
+    headline: 'An API for browsing and searching movies.',
 
     description: 'A REST API for browsing and searching movies.',
 
@@ -39,6 +49,13 @@ export const projects = [
       'MySQL'
     ],
 
+    challenge:
+      'Create a professional portfolio while applying modern Angular concepts.',
+
+    solution:
+      'The application was built with Standalone Components, the new Control Flow syntax, a reusable Design System and a component-based architecture.',
+
+
     github: '#'
   },
 
@@ -48,6 +65,8 @@ export const projects = [
     featured: false,
 
     title: 'Santander Bootcamp',
+
+    headline: 'An API for browsing and searching movies.',
 
     description: 'A project developed during the Santander Bootcamp.',
 
@@ -60,6 +79,17 @@ export const projects = [
       'PostgreSQL'
     ],
 
+    challenge:
+      'Create a professional portfolio while applying modern Angular concepts.',
+
+    solution:
+      'The application was built with Standalone Components, the new Control Flow syntax, a reusable Design System and a component-based architecture.',
+
+
     github: '#'
   }
 ];
+
+export function getProjectById(id: string | null) {
+  return projects.find(project => project.id === id);
+}

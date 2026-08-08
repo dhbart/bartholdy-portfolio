@@ -1,0 +1,92 @@
+<section class="project-details">
+
+    <div class="container">
+
+        @if (project) {
+
+            <a
+                class="project-details__back"
+                routerLink="/">
+
+                ← Back to Projects
+
+            </a>
+
+            <h1 class="project-details__title">
+                {{ project.title }}
+            </h1>
+
+            <p class="project-details__headline">
+                {{ project.headline }}
+            </p>
+
+            <div class="project-details__wrapper">
+
+                <div class="project-details__media">
+
+                    <img
+                        class="project-details__image project-image"
+                        [src]="project.image"
+                        [alt]="project.title">
+
+                </div>
+
+                <div class="project-details__content">
+
+                    <div class="project-details__section">
+
+                        <h2>Challenge</h2>
+
+                        <p>
+                            {{ project.challenge }}
+                        </p>
+
+                    </div>
+
+                    <div class="project-details__section">
+
+                        <h2>Solution</h2>
+
+                        <p>
+                            {{ project.solution }}
+                        </p>
+
+                    </div>
+
+                    <div class="project-details__section">
+
+                        <h2>Technologies</h2>
+
+                        <div class="project-details__technologies">
+
+                            @for (technology of project.technologies; track technology) {
+
+                                <span class="project-details__tag">
+
+                                    {{ technology }}
+
+                                </span>
+
+                            }
+
+                        </div>
+
+                    </div>
+
+                    <div class="project-details__actions">
+
+                        GitHub
+
+                        Live Demo
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+
+</section>

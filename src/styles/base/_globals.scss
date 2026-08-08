@@ -14,3 +14,16 @@ body {
   width: min(1120px, calc(100% - 2rem));
   margin-inline: auto;
 }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+a {
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary);
+}

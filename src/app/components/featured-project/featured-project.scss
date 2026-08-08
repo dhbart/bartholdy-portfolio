@@ -1,0 +1,27 @@
+.featured-project {
+    padding-block: var(--space-16);
+}
+
+.featured-project__card {
+    display:grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap:var(--space-8);
+    align-items:center;
+    padding: var(--space-6);
+}
+
+.featured-project__image {
+    border-radius: var(--radius-lg);
+}
+
+.featured-project__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+@media (max-width: 720px) {
+    .featured-project__card {
+        grid-template-columns: 1fr;
+    }
+}

@@ -2,49 +2,51 @@
 
     <div class="container">
 
-        <div class="hero__content">
+        <div class="hero__wrapper">
 
-            <span class="hero__greeting">
+            <div class="hero__content">
 
-                {{ hero.greeting }}
+                <span class="hero__greeting">
+                    {{ hero.greeting }}
+                </span>
 
-            </span>
+                <h1 class="hero__title">
+                    {{ hero.name }}
+                </h1>
 
-            <h1 class="hero__title">
+                <h2 class="hero__subtitle">
+                    {{ hero.title }}
+                </h2>
 
-                {{ hero.name }}
+                <p class="hero__description">
+                    {{ hero.description }}
+                </p>
 
-            </h1>
+                <div class="hero__actions">
 
-            <h2 class="hero__subtitle">
+                    <a
+                        class="hero__button button hero__button--primary"
+                        [href]="hero.actions.primary.link">
 
-                {{ hero.title }}
+                        {{ hero.actions.primary.label }}
 
-            </h2>
+                    </a>
 
-            <p class="hero__description">
+                    <a
+                        class="hero__button button hero__button--secondary"
+                        [href]="hero.actions.secondary.link">
 
-                {{ hero.description }}
+                        {{ hero.actions.secondary.label }}
 
-            </p>
+                    </a>
 
-            <div class="hero__actions">
+                </div>
 
-                <a
-                    class="hero__button hero__button--primary"
-                    [href]="hero.actions.primary.link">
+            </div>
 
-                    {{ hero.actions.primary.label }}
+            <div class="hero__visual">
 
-                </a>
-
-                <a
-                    class="hero__button hero__button--secondary"
-                    [href]="hero.actions.secondary.link">
-
-                    {{ hero.actions.secondary.label }}
-
-                </a>
+                <!-- reservado para V2 -->
 
             </div>
 
