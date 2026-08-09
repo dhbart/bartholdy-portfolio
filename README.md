@@ -1,59 +1,101 @@
-# BartholdyPortfolio
+# Daniel Bartholdy — Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.2.
+A personal developer portfolio built with **Angular 22**, showcasing professional experience, projects and background. Built as part of a Java + Angular immersion, using it as an opportunity to apply modern Angular concepts end-to-end — standalone components, the new control-flow syntax, and a fully data-driven content architecture.
 
-## Development server
+**Live demo:** _add your deployed URL here_
+**Author:** [Daniel Henrique Bartholdy](https://linkedin.com/in/daniel-bartholdy)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## About the project
+
+This portfolio was originally forked from [felipeAguiarCode/angular-blog](https://github.com/felipeAguiarCode/angular-blog) as the base for a hands-on Angular challenge, then extended and rebuilt with original content, layout and structure.
+
+Rather than hardcoding content into templates, every section of the site — hero, about, experience, projects and contact — is driven by strongly-typed data files, making the whole portfolio easy to update without touching component logic.
+
+## Features
+
+- **Hero** — quick introduction and call to action
+- **About** — a short personal summary
+- **Experience** — a detailed, timeline-style history of professional roles
+- **Projects** — a grid of featured projects with dedicated detail pages, pulled from real GitHub repositories
+- **Contact** — quick links to email, LinkedIn and GitHub
+- Fully responsive layout
+- Component-based architecture with reusable, typed data models
+
+## Tech stack
+
+| Category | Technology |
+| --- | --- |
+| Framework | [Angular 22](https://angular.dev) (standalone components, new control flow) |
+| Language | TypeScript |
+| Styling | SCSS |
+| Testing | [Vitest](https://vitest.dev) |
+| Tooling | Angular CLI, Prettier |
+
+## Project structure
+
+```
+src/app/
+├── components/       # Reusable UI building blocks (hero, about, experience, projects-grid, contact, header, footer)
+├── data/             # Typed content for every section (hero.ts, about.ts, experience.ts, projects.ts, contacts.ts, navigation.ts)
+├── pages/            # Route-level pages (home, project-details)
+├── app.routes.ts      # Application routes
+└── app.config.ts      # Application-wide configuration
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Content lives entirely in `src/app/data/`. To update a section — add a new role to Experience, or a new entry to Projects — edit the corresponding data file; no template changes required.
 
-## Code scaffolding
+## Getting started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Prerequisites
 
-```bash
-ng generate component component-name
-```
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- npm
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Installation
 
 ```bash
-ng build
+git clone https://github.com/dhbart/angular-blog.git
+cd angular-blog
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Development server
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+Navigate to `http://localhost:4200/`. The app reloads automatically on file changes.
 
-For end-to-end (e2e) testing, run:
+### Build
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Compiles the project and outputs production-ready artifacts to `dist/`.
 
-## Additional Resources
+### Tests
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm test
+```
+
+Runs unit tests with Vitest.
+
+## Roadmap
+
+- [ ] Add project screenshots / preview images
+- [ ] Deploy and link a live demo
+- [ ] Dark / light theme toggle
+
+## Acknowledgments
+
+Based on the base project from the [Alura](https://www.alura.com.br/) Java + Angular immersion, forked from [felipeAguiarCode/angular-blog](https://github.com/felipeAguiarCode/angular-blog).
+
+## Contact
+
+- **LinkedIn:** [linkedin.com/in/daniel-bartholdy](https://linkedin.com/in/daniel-bartholdy)
+- **GitHub:** [github.com/dhbart](https://github.com/dhbart)
