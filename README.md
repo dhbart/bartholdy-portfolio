@@ -93,7 +93,7 @@ Runs unit tests with Vitest.
 
 ## Acknowledgments
 
-Based on the base project from the [Alura](https://www.alura.com.br/) Java + Angular immersion, forked from [felipeAguiarCode/angular-blog](https://github.com/felipeAguiarCode/angular-blog).
+Based on the base project from the DIO Bootcamp Java + Angular immersion, forked from [felipeAguiarCode/angular-blog](https://github.com/felipeAguiarCode/angular-blog).
 
 ## Contact
 
