@@ -45,9 +45,6 @@
   margin-top: var(--space-2);
 }
 
-.hero__button {
-}
-
 .hero__button--primary {
   background: var(--primary);
   color: white;
@@ -69,6 +66,27 @@
   background: var(--background);
 }
 
+@media (max-width: 720px) {
+  .hero__wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__visual {
+    display: none;
+  }
+}
+
 .hero__visual {
-  min-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__visual-image {
+  width: min(100%, 360px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
 }

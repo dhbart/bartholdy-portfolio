@@ -45,7 +45,7 @@
 }
 
 .header__menu-link:hover {
-  color: var(--text-primary);
+  color: var(--primary);
 }
 
 .header__menu-link:hover::after {
@@ -68,4 +68,14 @@
 
 .header__theme-toggle:hover {
   background-color: var(--surface);
+}
+
+.header__theme-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+:host-context([data-theme='dark']) .header__theme-icon {
+  filter: brightness(0) invert(1);
 }

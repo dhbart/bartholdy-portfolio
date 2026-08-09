@@ -25,9 +25,11 @@
                 <div class="project-details__media">
 
                     <img
-                        class="project-details__image project-image"
-                        [src]="project.image"
-                        [alt]="project.title">
+                      class="project-details__image project-image"
+                      [ngSrc]="project.image"
+                      [alt]="project.title"
+                      width="1280"
+                      height="720">
 
                 </div>
 
@@ -74,18 +76,38 @@
                     </div>
 
                     <div class="project-details__actions">
+                      @if (project.github && project.github !== '#') {
+                        <a
+                          class="button button--secondary"
+                          [href]="project.github"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          GitHub
+                        </a>
+                      }
 
-                        GitHub
-
-                        Live Demo
-
+                      @if (project.demo && project.demo !== '#') {
+                        <a
+                          class="button button--secondary"
+                          [href]="project.demo"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                          Live Demo
+                        </a>
+                      }
                     </div>
 
                 </div>
 
             </div>
 
-        }
+        }  @else {
+              <div class="project-details__empty">
+                <h1>Project not found</h1>
+                <p>The requested project could not be found.</p>
+                <a routerLink="/">Back to Home</a>
+              </div>
+            }
 
     </div>
 

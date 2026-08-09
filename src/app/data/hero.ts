@@ -1,9 +1,9 @@
 export const hero = {
   greeting: 'Hi, I\'m',
 
-  name: 'Daniel Bartholdy',
+  name: 'Daniel Henrique Bartholdy',
 
-  title: 'Tech Lead • Business Analyst • Product Manager',
+  title: 'Software Developer • Tech Lead • Business Analyst • Product Owner',
 
   description:
     'I enjoy solving business problems through technology, building scalable solutions and leading high-performing teams.',

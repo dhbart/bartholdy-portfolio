@@ -1,24 +1,28 @@
 <section class="projects" id="projects">
-
   <div class="container">
-
     <h2 class="projects__title section-title">
       Selected Projects
     </h2>
 
     <div class="projects__grid">
-
       @for (project of projects; track project.id) {
+        <article
+          class="projects__card card"
+          role="link"
+          tabindex="0"
+          (click)="openProject(project.id, $event)"
+          (keydown)="onCardKeydown($event, project.id)">
 
-        <article class="projects__card card">
-
-          <img
-            class="projects__card-image project-image"
-            [src]="project.image"
-            [alt]="project.title">
+          <div class="projects__card-media">
+            <img
+              class="projects__card-image"
+              [ngSrc]="project.image"
+              [alt]="project.title"
+              width="640"
+              height="360">
+          </div>
 
           <div class="projects__card-content">
-
             <h3 class="projects__card-title">
               {{ project.title }}
             </h3>
@@ -28,44 +32,38 @@
             </p>
 
             <div class="projects__card-technologies">
-
-              @for (technology of project.technologies; track technology) {
-
+              @for (
+                technology of project.technologies;
+                track technology
+              ) {
                 <span class="projects__tag">
                   {{ technology }}
                 </span>
-
               }
-
             </div>
 
             <div class="projects__card-actions">
+              @if (project.github && project.github !== '#') {
+                <a
+                  class="button button--secondary"
+                  [href]="project.github"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  (click)="$event.stopPropagation()">
+                  GitHub
+                </a>
+              }
 
               <a
-                [href]="project.github"
-                target="_blank">
-
-                GitHub
-
+                class="button button--secondary"
+                [routerLink]="['/projects', project.id]"
+                (click)="$event.stopPropagation()">
+                View Details →
               </a>
-
-              <a
-                  [routerLink]="['/projects', project.id]">
-
-                  View Details →
-
-              </a>
-
             </div>
-
           </div>
-
         </article>
-
       }
-
     </div>
-
   </div>
-
 </section>

@@ -37,3 +37,16 @@
   object-fit: cover;
   border-radius: var(--radius-lg);
 }
+
+.button--secondary {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.button--secondary:hover {
+  border-color: var(--primary);
+  background: var(--surface-hover);
+  color: var(--primary);
+  transform: translateY(-2px);
+}

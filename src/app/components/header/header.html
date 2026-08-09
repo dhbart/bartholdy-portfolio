@@ -19,11 +19,34 @@
                 }
               </ul>
 
-            <button class="header__theme-toggle">
+            <button
+                type="button"
+                class="header__theme-toggle"
+                [attr.aria-label]="
+                  themeService.isDark()
+                    ? 'Switch to light theme'
+                    : 'Switch to dark theme'
+                "
+                [attr.aria-pressed]="themeService.isDark()"
+                (click)="themeService.toggle()">
 
-                🌙
+                @if (themeService.isDark()) {
+                  <img
+                    class="header__theme-icon"
+                    ngSrc="/assets/icons/sun.svg"
+                    width="20"
+                    height="20"
+                    alt="">
+                } @else {
+                  <img
+                    class="header__theme-icon"
+                    ngSrc="/assets/icons/moon.svg"
+                    width="20"
+                    height="20"
+                    alt="">
+                }
 
-            </button>
+              </button>
 
         </nav>
 

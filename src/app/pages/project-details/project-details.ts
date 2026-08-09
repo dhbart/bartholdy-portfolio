@@ -1,27 +1,21 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { getProjectById } from '../../data/projects';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
+import { getProjectById, Project } from '../../data/projects';
 
 @Component({
-  selector: 'app-project-details',
-  imports: [RouterLink],
+  selector: 'bp-project-details',
+  imports: [RouterLink, NgOptimizedImage ],
   templateUrl: './project-details.html',
   styleUrl: './project-details.scss',
 })
 export class ProjectDetails {
-  project: any;
+  private readonly route = inject(ActivatedRoute);
 
-  constructor(
-    private route: ActivatedRoute
-  ) {  }
+  project: Project | undefined;
 
-    ngOnInit() {
-
-		const id = this.route.snapshot.paramMap.get('id');
-
-		this.project = getProjectById(id);
-
-    }
-
+  constructor() {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.project = getProjectById(id);
+  }
 }

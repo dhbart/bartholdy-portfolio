@@ -1,0 +1,12 @@
+.footer {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.footer__copyright {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  text-align: center;
+}

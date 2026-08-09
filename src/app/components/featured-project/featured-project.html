@@ -1,4 +1,4 @@
-<section class="featured-project" id="projects">
+<section class="featured-project" id="featured-project">
 
     <div class="container">
 
@@ -7,15 +7,22 @@
             Featured Project
 
         </h2>
+          @if (project) {
 
-        <article class="featured-project__card card">
+            <article class="featured-project__card card"
+              role="link"
+              tabindex="0"
+              (click)="openProject(project.id, $event)"
+              (keydown)="onCardKeydown($event, project.id)">
 
-            @if (project) {
+
 
                 <img
                     class="featured-project__image project-image"
-                    [src]="project.image"
-                    [alt]="project.title">
+                    [ngSrc]="project.image"
+                    [alt]="project.title"
+                    width="640"
+                    height="360">
 
                 <div class="featured-project__content">
 
@@ -31,17 +38,19 @@
 
                     </p>
 
-                    <p>
-
-                        {{ project.technologies.join(' - ') }}
-
-                    </p>
+                    <div class="featured-project__technologies">
+                      @for (technology of project.technologies; track technology) {
+                        <span class="featured-project__tag">
+                          {{ technology }}
+                        </span>
+                      }
+                    </div>
 
                 </div>
 
-            }
+            </article>
 
-        </article>
+          }
 
     </div>
 
