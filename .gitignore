@@ -29,6 +29,11 @@ yarn-error.log
 !.vscode/mcp.json
 .history/*
 
+#AI
+# Visual Studio Code
+.ai/*
+AGENTS.md
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
