@@ -32,15 +32,20 @@ export const experiences: Experience[] = [
       'Led and mentored a team of up to 9 (business analysts + outsourced Progress development squad)'
     ],
     technologies: [
-      'C#',
-      'SQL Server',
-      'Totvs Protheus',
+      'SQL',
+      'Oracle',
+      'PostreSql',
+      'Progress',
+      'Senior Vetorh',
       'Senior BPM',
+      'Leadership',
       'REST/SOAP APIs',
       'Azure DevOps',
       'Zendesk',
       'Scrum',
-      'Kanban'
+      'Kanban',
+      'PHP',
+      'Qualitor'
     ]
   },
   {

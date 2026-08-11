@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { featuredProject as featuredProjectData} from '../../data/featured-project';
 
 @Component({
   selector: 'bp-featured-project',
-  imports: [NgOptimizedImage, RouterLink ],
+  imports: [NgOptimizedImage ],
   templateUrl: './featured-project.html',
   styleUrl: './featured-project.scss',
 })

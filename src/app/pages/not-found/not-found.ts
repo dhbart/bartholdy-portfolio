@@ -1,6 +1,6 @@
 
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'bp-not-found',
@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
       <div class="container">
         <h1>Page not found</h1>
         <p>The page you are looking for does not exist.</p>
+        <p>You're being redirected...</p>
         <a class="button" routerLink="/">Back to Home</a>
       </div>
     </main>
@@ -27,4 +28,18 @@ import { RouterLink } from '@angular/router';
     }
   `,
 })
-export class NotFound {}
+export class NotFound implements OnInit{
+  constructor ( private navigator:Router) {
+
+  }
+
+
+  ngOnInit(): void {
+      setInterval(() => {
+        this.navigator.navigate(['/'])
+      },5000)
+
+  }
+}
+
+

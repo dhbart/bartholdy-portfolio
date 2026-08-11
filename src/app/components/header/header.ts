@@ -2,7 +2,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { navigation as navigationData } from '../../data/navigation';
-import { ThemeService } from '../../core/theme.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'bp-header',

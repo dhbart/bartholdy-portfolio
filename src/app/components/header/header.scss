@@ -4,6 +4,7 @@
     background: var(--background);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
+    flex-wrap: wrap;
 }
 
 .header__navbar {
