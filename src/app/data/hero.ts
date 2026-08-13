@@ -15,7 +15,7 @@ export const hero = {
     },
     secondary: {
       label: 'Download Resume',
-      link: '#'
+      link: '/docs/Daniel-Bartholdy-CV.pdf'
     }
   }
 };

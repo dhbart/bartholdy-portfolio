@@ -71,13 +71,16 @@ export const experiences: Experience[] = [
     ],
     technologies: [
       'SQL',
+      'SQL Server',
       'VBA',
       'LSP',
       'ADVPL',
       'Senior Vetorh HCM',
       'Totvs Protheus',
       'REST/SOAP APIs',
-      'Zendesk'
+      'Zendesk',
+      'Agidesk',
+      'TWM Guiando'
     ]
   },
   {
@@ -109,7 +112,8 @@ export const experiences: Experience[] = [
       'SAP RFC',
       'REST APIs',
       'SOAP',
-      'JSON/XML'
+      'JSON/XML',
+      'Progress'
     ]
   },
   {

@@ -63,7 +63,8 @@
 }
 
 .hero__button--secondary:hover {
-  background: var(--background);
+  background: var(--primary-hover);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 720px) {

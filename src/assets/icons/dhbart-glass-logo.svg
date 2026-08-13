@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">dhbart glass-style logo</title>
+  <desc id="desc">A blue rounded-square icon with a glossy glass highlight and white dhbart wordmark.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f8cff"/>
+      <stop offset="0.48" stop-color="#1768df"/>
+      <stop offset="1" stop-color="#0b3caa"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.42" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#001e68" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.32" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="0.62" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#052a82" flood-opacity="0.32"/>
+    </filter>
+    <filter id="blur"><feGaussianBlur stdDeviation="28"/></filter>
+    <clipPath id="clip"><rect x="48" y="48" width="928" height="928" rx="214"/></clipPath>
+  </defs>
+
+  <rect x="48" y="48" width="928" height="928" rx="214" fill="url(#bg)" filter="url(#shadow)"/>
+  <g clip-path="url(#clip)">
+    <ellipse cx="230" cy="70" rx="360" ry="215" fill="#91c7ff" opacity="0.22" filter="url(#blur)"/>
+    <ellipse cx="850" cy="940" rx="300" ry="210" fill="#001f75" opacity="0.24" filter="url(#blur)"/>
+    <path d="M-80 245 C220 80 510 220 1110 90 L1110 325 C610 435 245 288 -80 510Z" fill="#fff" opacity="0.09"/>
+    <path d="M-100 190 C180 45 460 135 1100 20" fill="none" stroke="#fff" stroke-opacity="0.62" stroke-width="18"/>
+    <path d="M-40 238 C250 100 500 190 1080 70" fill="none" stroke="url(#shine)" stroke-width="7" opacity="0.9"/>
+    <rect x="68" y="68" width="888" height="888" rx="196" fill="url(#glass)" stroke="#fff" stroke-opacity="0.32" stroke-width="3"/>
+    <path d="M160 727 C330 808 637 818 865 687" fill="none" stroke="#0a3ca9" stroke-opacity="0.18" stroke-width="56"/>
+  </g>
+  <rect x="49.5" y="49.5" width="925" height="925" rx="212.5" fill="none" stroke="#fff" stroke-opacity="0.22" stroke-width="3"/>
+
+  <text x="512" y="584" text-anchor="middle" fill="#fff"
+    font-family="Avenir Next, Montserrat, Gotham, Arial, sans-serif"
+    font-size="188" font-weight="650" letter-spacing="-12">dhbart</text>
+  <path d="M246 640 H778" stroke="#fff" stroke-opacity="0.55" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="246" cy="640" r="5" fill="#fff" opacity="0.8"/>
+  <circle cx="778" cy="640" r="5" fill="#fff" opacity="0.8"/>
+</svg>
