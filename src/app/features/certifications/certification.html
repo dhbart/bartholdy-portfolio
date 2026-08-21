@@ -1,0 +1,78 @@
+<section class="certifications" id="certifications">
+	<div class="container">
+		<h2 class="certifications__title section-title">
+			{{ ui().sections.certifications }}
+		</h2>
+
+		@if (status() === 'loading') {
+			<p class="certifications__state" aria-live="polite">
+				{{ ui().certifications.loading }}
+			</p>
+		} @else if (status() === 'error') {
+			<p class="certifications__state" role="alert">
+				{{ ui().certifications.error }}
+			</p>
+		} @else if (certifications().length === 0) {
+			<p class="certifications__state">
+				{{ ui().certifications.empty }}
+			</p>
+		} @else {
+			<div class="certifications__grid">
+				@for (certification of certifications(); track certification.id) {
+					<article class="certifications__card card">
+						<div class="certifications__header">
+							<span class="certifications__type" aria-hidden="true">
+								{{ typeEmoji(certification.certificationType) }}
+							</span>
+							<span class="certifications__type-label">
+								{{ certification.certificationType }}
+							</span>
+						</div>
+
+						<h3>{{ certification.title }}</h3>
+
+						@if (certification.issuer) {
+							<p class="certifications__issuer">{{ certification.issuer }}</p>
+						}
+
+						@if (certification.description) {
+							<p>{{ certification.description }}</p>
+						}
+
+						<div class="certifications__meta">
+							@if (certification.issueDate) {
+								<time [attr.datetime]="certification.issueDate">
+									{{ ui().certifications.issued }}: {{ certification.issueDate }}
+								</time>
+							}
+
+							@if (certification.credentialCode) {
+								<span>
+									{{ ui().certifications.credential }}: {{ certification.credentialCode }}
+								</span>
+							}
+						</div>
+
+						@if (certification.technologies?.length) {
+							<div class="certifications__technologies">
+								@for (technology of certification.technologies; track technology) {
+									<span class="certifications__tag">{{ technology }}</span>
+								}
+							</div>
+						}
+
+						@if (certification.credentialUrl) {
+							<a
+								class="button button--secondary certifications__credential-link"
+								[href]="certification.credentialUrl"
+								target="_blank"
+								rel="noopener noreferrer">
+								{{ ui().certifications.viewCredential }}
+							</a>
+						}
+					</article>
+				}
+			</div>
+		}
+	</div>
+</section>

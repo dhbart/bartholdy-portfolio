@@ -11,13 +11,14 @@ A personal developer portfolio built with **Angular 22**, showcasing professiona
 
 This portfolio was originally forked from [felipeAguiarCode/angular-blog](https://github.com/felipeAguiarCode/angular-blog) as the base for a hands-on Angular challenge, then extended and rebuilt with original content, layout and structure.
 
-Rather than hardcoding content into templates, every section of the site — hero, about, experience, projects and contact — is driven by strongly-typed data files, making the whole portfolio easy to update without touching component logic.
+Rather than hardcoding content into templates, every section of the site — hero, about, experience, certifications, projects and contact — is driven by strongly-typed data models and backend responses, making the whole portfolio easy to update without touching component logic.
 
 ## Features
 
 - **Hero** — quick introduction and call to action
 - **About** — a short personal summary
 - **Experience** — a detailed, timeline-style history of professional roles
+- **Certifications** — certifications and education loaded from the backend API
 - **Projects** — a grid of featured projects with dedicated detail pages, pulled from real GitHub repositories
 - **Contact** — quick links to email, LinkedIn and GitHub
 - Fully responsive layout
@@ -39,12 +40,21 @@ Rather than hardcoding content into templates, every section of the site — her
 src/app/
 ├── components/       # Reusable UI building blocks (hero, about, experience, projects-grid, contact, header, footer)
 ├── data/             # Typed content for every section (hero.ts, about.ts, experience.ts, projects.ts, contacts.ts, navigation.ts)
+├── models/            # API transport models
 ├── pages/            # Route-level pages (home, project-details)
+├── services/          # API clients, HTTP error handling, loading and theme services
+├── environments/      # Runtime configuration such as the API base URL
 ├── app.routes.ts      # Application routes
 └── app.config.ts      # Application-wide configuration
 ```
 
 Content lives entirely in `src/app/data/`. To update a section — add a new role to Experience, or a new entry to Projects — edit the corresponding data file; no template changes required.
+
+### API infrastructure
+
+The Angular API base URL is centralized in `src/environments/environment.ts` and defaults to `http://localhost:8080/api/v1`. `HttpClient` is configured during application bootstrap. Feature services under `src/app/services/` expose the backend read endpoints without changing the current static data flow.
+
+Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`; `LoadingService` provides reusable request tracking for future page integration.
 
 ## Getting started
 

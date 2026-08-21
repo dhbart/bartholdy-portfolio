@@ -1,0 +1,69 @@
+<section class="projects" id="projects">
+  <div class="container">
+    <h2 class="projects__title section-title">
+      {{ ui().sections.selectedProjects }}
+    </h2>
+
+    <div class="projects__grid">
+      @for (project of projects(); track project.id) {
+        <article
+          class="projects__card card"
+          role="link"
+          tabindex="0"
+          (click)="openProject(project.slug, $event)"
+          (keydown)="onCardKeydown($event, project.slug)">
+
+          <div class="projects__card-media">
+            <img
+              class="projects__card-image"
+              [ngSrc]="project.imageUrl"
+              [alt]="project.title"
+              width="640"
+              height="360">
+          </div>
+
+          <div class="projects__card-content">
+            <h3 class="projects__card-title">
+              {{ project.title }}
+            </h3>
+
+            <p class="projects__card-description">
+              {{ project.description }}
+            </p>
+
+            <div class="projects__card-technologies">
+              @for (
+                technology of project.technologies;
+                track technology.id
+              ) {
+                <span class="projects__tag">
+                  {{ technology.name }}
+                </span>
+              }
+            </div>
+
+            <div class="projects__card-actions">
+              @if (project.githubUrl && project.githubUrl !== '#') {
+                <a
+                  class="button button--secondary"
+                  [href]="project.githubUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  (click)="$event.stopPropagation()">
+                  GitHub
+                </a>
+              }
+
+              <a
+                class="button button--secondary"
+                [routerLink]="['/projects', project.slug]"
+                (click)="$event.stopPropagation()">
+                View Details →
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

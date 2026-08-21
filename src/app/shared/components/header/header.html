@@ -1,0 +1,75 @@
+<header class="header">
+
+    <div class="container">
+
+        <nav class="header__navbar">
+
+            <a class="header__logo" routerLink="/" (click)="onLogoClick($event)">
+                <img
+                    class="header__logo"
+                    ngSrc="/assets/images/dhbart-glass-logo.png"
+                    width="50"
+                    height="50"
+                    alt="">
+
+            </a>
+
+            <ul class="header__menu">
+                @for (item of menus(); track item.route) {
+                  <li class="header__menu-item">
+                    <a class="header__menu-link"
+                       [href]="item.route">
+                      {{ item.label }}
+                    </a>
+                  </li>
+                }
+              </ul>
+
+            <div class="header__actions">
+              <label class="header__locale-selector">
+                <span class="visually-hidden">Select language</span>
+                <select
+                  [value]="localeService.locale()"
+                  (change)="changeLocale($event)"
+                  aria-label="Select language">
+                  @for (locale of localeService.supportedLocales; track locale.code) {
+                    <option [value]="locale.code">{{ locale.emoji }} {{ locale.name }}</option>
+                  }
+                </select>
+              </label>
+
+              <button
+                type="button"
+                class="header__theme-toggle"
+                [attr.aria-label]="
+                  themeService.isDark()
+                    ? 'Switch to light theme'
+                    : 'Switch to dark theme'
+                "
+                [attr.aria-pressed]="themeService.isDark()"
+                (click)="themeService.toggle()">
+
+                @if (themeService.isDark()) {
+                  <img
+                    class="header__theme-icon"
+                    ngSrc="/assets/icons/sun.svg"
+                    width="20"
+                    height="20"
+                    alt="">
+                } @else {
+                  <img
+                    class="header__theme-icon"
+                    ngSrc="/assets/icons/moon.svg"
+                    width="20"
+                    height="20"
+                    alt="">
+                }
+
+              </button>
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>

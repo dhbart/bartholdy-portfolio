@@ -2,16 +2,17 @@
 
     <div class="container">
 
-        @if (project) {
+        @if (project(); as project) {
 
             <a
                 class="project-details__back"
-                routerLink="/">
+                routerLink="/"
+                fragment="projects">
 
-                ← Back to Projects
-
+                ← {{ui().projectDetails.backToProjects}}
             </a>
-
+            <br/>
+            <br/>
             <h1 class="project-details__title">
                 {{ project.title }}
             </h1>
@@ -26,7 +27,7 @@
 
                     <img
                       class="project-details__image project-image"
-                      [ngSrc]="project.image"
+                      [ngSrc]="project.imageUrl"
                       [alt]="project.title"
                       width="1280"
                       height="720">
@@ -37,7 +38,7 @@
 
                     <div class="project-details__section">
 
-                        <h2>Challenge</h2>
+                        <h2>{{ui().projectDetails.challenge}}</h2>
 
                         <p>
                             {{ project.challenge }}
@@ -47,7 +48,7 @@
 
                     <div class="project-details__section">
 
-                        <h2>Solution</h2>
+                        <h2>{{ui().projectDetails.solution}}</h2>
 
                         <p>
                             {{ project.solution }}
@@ -57,15 +58,15 @@
 
                     <div class="project-details__section">
 
-                        <h2>Technologies</h2>
+                        <h2>{{ui().projectDetails.technologies}}</h2>
 
                         <div class="project-details__technologies">
 
-                            @for (technology of project.technologies; track technology) {
+                            @for (technology of project.technologies; track technology.id) {
 
                                 <span class="project-details__tag">
 
-                                    {{ technology }}
+                                    {{ technology.name }}
 
                                 </span>
 
@@ -76,23 +77,23 @@
                     </div>
 
                     <div class="project-details__actions">
-                      @if (project.github && project.github !== '#') {
+                      @if (project.githubUrl && project.githubUrl !== '#') {
                         <a
                           class="button button--secondary"
-                          [href]="project.github"
+                          [href]="project.githubUrl"
                           target="_blank"
                           rel="noopener noreferrer">
                           GitHub
                         </a>
                       }
 
-                      @if (project.demo && project.demo !== '#') {
+                      @if (project.demoUrl && project.demoUrl !== '#') {
                         <a
                           class="button button--secondary"
-                          [href]="project.demo"
+                          [href]="project.demoUrl"
                           target="_blank"
                           rel="noopener noreferrer">
-                          Live Demo
+                          {{ui().projectDetails.liveDemo}}
                         </a>
                       }
                     </div>
@@ -101,11 +102,15 @@
 
             </div>
 
-        }  @else {
+                } @else if (status() === 'loading') {
+                            <div class="project-details__empty" aria-live="polite">
+                                <p>Loading project...</p>
+                            </div>
+                } @else {
               <div class="project-details__empty">
-                <h1>Project not found</h1>
-                <p>The requested project could not be found.</p>
-                <a routerLink="/">Back to Home</a>
+                <h1>{{ui().projectDetails.projectNotFound}}</h1>
+                                <p>{{ui().projectDetails.requestProjectNotFound}}</p>
+                <a routerLink="/">{{ui().projectDetails.backToProjects}}</a>
               </div>
             }
 
