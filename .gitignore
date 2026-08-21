@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+/src/environments/environment.prod.ts
 /tmp
 /out-tsc
 /bazel-out

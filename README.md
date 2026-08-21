@@ -52,7 +52,7 @@ Content lives entirely in `src/app/data/`. To update a section — add a new rol
 
 ### API infrastructure
 
-The Angular API base URL is centralized in the environment files. Local development uses `http://localhost:8080/api/v1` from `src/environments/environment.ts`; production builds replace it with the deployed API URL from `src/environments/environment.prod.ts`. `HttpClient` is configured during application bootstrap. Feature services under `src/app/services/` expose the backend read endpoints without changing the current static data flow.
+The Angular API base URL is centralized in the environment files. Local development uses `http://localhost:8080/api/v1` from `src/environments/environment.ts`. Production builds generate the ignored `src/environments/environment.prod.ts` from the `API_URL` environment variable before compiling. `HttpClient` is configured during application bootstrap.
 
 Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`; `LoadingService` provides reusable request tracking for future page integration.
 
@@ -82,10 +82,13 @@ Navigate to `http://localhost:4200/`. The app reloads automatically on file chan
 ### Build
 
 ```bash
+$env:API_URL = "https://portfolio-api-g6au.onrender.com/api/v1"
 npm run build
 ```
 
 Compiles the project and outputs production-ready artifacts to `dist/`.
+
+For Vercel, add `API_URL` under Project Settings > Environment Variables with the value `https://portfolio-api-g6au.onrender.com/api/v1`. Vercel then provides it automatically during `npm run build`.
 
 ### Tests
 
