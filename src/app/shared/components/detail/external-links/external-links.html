@@ -1,0 +1,11 @@
+<div class="external-links">
+  @for (link of visibleLinks(); track link.url) {
+    <a
+      class="button button--secondary"
+      [href]="link.url"
+      target="_blank"
+      rel="noopener noreferrer">
+      {{ link.label }}
+    </a>
+  }
+</div>

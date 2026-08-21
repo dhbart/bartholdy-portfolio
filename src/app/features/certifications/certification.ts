@@ -1,4 +1,5 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { LoadingService } from '../../core/services/loading.service';
 import { LocaleService } from '../../core/i18n/locale.service';
@@ -16,7 +17,7 @@ const CERTIFICATION_TYPE_EMOJIS: Record<string, string> = {
 
 @Component({
   selector: 'bp-certification',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './certification.html',
   styleUrl: './certification.scss',
 })

@@ -4,33 +4,23 @@
 
         @if (project(); as project) {
 
-            <a
-                class="project-details__back"
-                routerLink="/"
-                fragment="projects">
-
-                ← {{ui().projectDetails.backToProjects}}
-            </a>
+            <bp-back-button
+                [label]="ui().projectDetails.backToProjects"
+                link="/"
+                fragment="projects" />
             <br/>
             <br/>
-            <h1 class="project-details__title">
-                {{ project.title }}
-            </h1>
-
-            <p class="project-details__headline">
-                {{ project.headline }}
-            </p>
+            <bp-detail-header
+                [title]="project.title"
+                [subtitle]="project.headline" />
 
             <div class="project-details__wrapper">
 
                 <div class="project-details__media">
 
-                    <img
-                      class="project-details__image project-image"
-                      [ngSrc]="project.imageUrl"
-                      [alt]="project.title"
-                      width="1280"
-                      height="720">
+                                        <bp-image-preview
+                                            [src]="project.imageUrl"
+                                            [alt]="project.title" />
 
                 </div>
 
@@ -38,7 +28,7 @@
 
                     <div class="project-details__section">
 
-                        <h2>{{ui().projectDetails.challenge}}</h2>
+                        <bp-section-title [title]="ui().projectDetails.challenge" />
 
                         <p>
                             {{ project.challenge }}
@@ -48,7 +38,7 @@
 
                     <div class="project-details__section">
 
-                        <h2>{{ui().projectDetails.solution}}</h2>
+                        <bp-section-title [title]="ui().projectDetails.solution" />
 
                         <p>
                             {{ project.solution }}
@@ -58,60 +48,24 @@
 
                     <div class="project-details__section">
 
-                        <h2>{{ui().projectDetails.technologies}}</h2>
-
-                        <div class="project-details__technologies">
-
-                            @for (technology of project.technologies; track technology.id) {
-
-                                <span class="project-details__tag">
-
-                                    {{ technology.name }}
-
-                                </span>
-
-                            }
-
-                        </div>
+                        <bp-section-title [title]="ui().projectDetails.technologies" />
+                        <bp-technology-badges [technologies]="project.technologies" />
 
                     </div>
 
-                    <div class="project-details__actions">
-                      @if (project.githubUrl && project.githubUrl !== '#') {
-                        <a
-                          class="button button--secondary"
-                          [href]="project.githubUrl"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          GitHub
-                        </a>
-                      }
-
-                      @if (project.demoUrl && project.demoUrl !== '#') {
-                        <a
-                          class="button button--secondary"
-                          [href]="project.demoUrl"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                          {{ui().projectDetails.liveDemo}}
-                        </a>
-                      }
-                    </div>
+                                        <bp-external-links [links]="externalLinks()" />
 
                 </div>
 
             </div>
 
                 } @else if (status() === 'loading') {
-                            <div class="project-details__empty" aria-live="polite">
-                                <p>Loading project...</p>
-                            </div>
+                                                        <bp-loading-state message="Loading project..." />
                 } @else {
-              <div class="project-details__empty">
-                <h1>{{ui().projectDetails.projectNotFound}}</h1>
-                                <p>{{ui().projectDetails.requestProjectNotFound}}</p>
-                <a routerLink="/">{{ui().projectDetails.backToProjects}}</a>
-              </div>
+                            <bp-empty-state
+                                [title]="ui().projectDetails.projectNotFound"
+                                [message]="ui().projectDetails.requestProjectNotFound"
+                                [linkLabel]="ui().projectDetails.backToProjects" />
             }
 
     </div>

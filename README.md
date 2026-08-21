@@ -52,7 +52,7 @@ Content lives entirely in `src/app/data/`. To update a section — add a new rol
 
 ### API infrastructure
 
-The Angular API base URL is centralized in `src/environments/environment.ts` and defaults to `http://localhost:8080/api/v1`. `HttpClient` is configured during application bootstrap. Feature services under `src/app/services/` expose the backend read endpoints without changing the current static data flow.
+The Angular API base URL is centralized in the environment files. Local development uses `http://localhost:8080/api/v1` from `src/environments/environment.ts`; production builds replace it with the deployed API URL from `src/environments/environment.prod.ts`. `HttpClient` is configured during application bootstrap. Feature services under `src/app/services/` expose the backend read endpoints without changing the current static data flow.
 
 Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`; `LoadingService` provides reusable request tracking for future page integration.
 

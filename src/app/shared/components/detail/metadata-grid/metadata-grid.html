@@ -1,0 +1,8 @@
+<dl class="metadata-grid">
+  @for (item of items(); track item.label) {
+    <div class="metadata-grid__item">
+      <dt>{{ item.label }}</dt>
+      <dd>{{ item.value }}</dd>
+    </div>
+  }
+</dl>

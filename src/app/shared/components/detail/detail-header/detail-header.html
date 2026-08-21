@@ -1,0 +1,26 @@
+<header class="detail-header">
+  @if (imageUrl(); as imageUrl) {
+    <img
+      class="detail-header__image"
+      [ngSrc]="imageUrl"
+      [alt]="imageAlt()"
+      width="1280"
+      height="720">
+  }
+
+  <div class="detail-header__content">
+    @if (type(); as detailType) {
+      <p class="detail-header__type">{{ detailType }}</p>
+    }
+
+    <h1 class="detail-header__title">{{ title() }}</h1>
+
+    @if (subtitle(); as detailSubtitle) {
+      <p class="detail-header__subtitle">{{ detailSubtitle }}</p>
+    }
+
+    <div class="detail-header__actions">
+      <ng-content select="[detailActions]" />
+    </div>
+  </div>
+</header>

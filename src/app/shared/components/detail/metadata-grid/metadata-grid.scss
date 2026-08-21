@@ -1,0 +1,19 @@
+.metadata-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.metadata-grid__item {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.metadata-grid dt {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.metadata-grid dd {
+  margin: 0;
+}

@@ -1,0 +1,11 @@
+<section class="empty-state" aria-live="polite">
+  @if (title(); as emptyTitle) {
+    <h1>{{ emptyTitle }}</h1>
+  }
+  @if (message(); as emptyMessage) {
+    <p>{{ emptyMessage }}</p>
+  }
+  @if (linkLabel(); as emptyLinkLabel) {
+    <a [routerLink]="link()">{{ emptyLinkLabel }}</a>
+  }
+</section>

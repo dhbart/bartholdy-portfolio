@@ -11,4 +11,8 @@ export class CertificationService {
   getCertifications(): Observable<CertificationResponse[]> {
     return this.api.get<CertificationResponse[]>('certifications');
   }
+
+  getCertification(id: string): Observable<CertificationResponse> {
+    return this.api.get<CertificationResponse>(`certifications/${encodeURIComponent(id)}`);
+  }
 }

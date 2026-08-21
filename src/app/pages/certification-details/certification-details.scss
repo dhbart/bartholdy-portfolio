@@ -1,0 +1,16 @@
+.certification-details {
+  padding-block: var(--space-10);
+}
+
+.certification-details__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.certification-details section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

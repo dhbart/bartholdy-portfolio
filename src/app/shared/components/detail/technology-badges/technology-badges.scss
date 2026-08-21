@@ -1,0 +1,17 @@
+.technology-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.technology-badges__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: .4rem .75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-hover);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-medium);
+}

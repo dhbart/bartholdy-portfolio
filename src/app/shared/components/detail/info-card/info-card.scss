@@ -1,0 +1,10 @@
+.info-card {
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.info-card__title {
+  margin-bottom: var(--space-3);
+}

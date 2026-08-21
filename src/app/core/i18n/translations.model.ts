@@ -18,6 +18,26 @@ export interface Translations {
     viewCredential: string;
   };
 
+  certificationDetails: {
+    backToCertifications: string;
+    description: string;
+    metadata: {
+      issueDate: string;
+      expirationDate: string;
+      credentialId: string;
+      workload: string;
+      institution: string;
+      type: string;
+      status: string;
+    };
+    technologies: string;
+    credential: string;
+    institution: string;
+    repository: string;
+    notFound: string;
+    requestNotFound: string;
+  };
+
   buttons: {
     viewProjects: string;
     downloadResume: string;

@@ -1,0 +1,52 @@
+<section class="certification-details">
+  <div class="container">
+    @if (certification(); as certification) {
+      <bp-back-button
+        [label]="ui().certificationDetails.backToCertifications"
+        link="/"
+        fragment="certifications" />
+
+      <bp-detail-header
+        [title]="certification.title"
+        [subtitle]="certification.institution ?? certification.issuer ?? undefined"
+        [type]="certification.certificationType"
+        [imageUrl]="(certification.imageUrl) ?? undefined"
+        [imageAlt]="certification.title" />
+
+      <div class="certification-details__content">
+        @if (certification.imageUrl; as imageUrl) {
+          <bp-image-preview [src]="imageUrl" [alt]="certification.title" />
+        }
+
+        <bp-metadata-grid [items]="metadata()" />
+
+        @if (certification.description) {
+          <section>
+            <bp-section-title [title]="ui().certificationDetails.description" />
+            <bp-info-card>
+              <p>{{ certification.description }}</p>
+            </bp-info-card>
+          </section>
+        }
+
+        @if (technologies().length) {
+          <section>
+            <bp-section-title [title]="ui().certificationDetails.technologies" />
+            <bp-technology-badges [technologies]="technologies()" />
+          </section>
+        }
+
+        <bp-external-links [links]="externalLinks()" />
+      </div>
+    } @else if (status() === 'loading') {
+      <bp-loading-state [message]="ui().certifications.loading" />
+    } @else {
+      <bp-empty-state
+        [title]="ui().certificationDetails.notFound"
+        [message]="ui().certificationDetails.requestNotFound"
+        [linkLabel]="ui().certificationDetails.backToCertifications"
+        link="/"
+        fragment="certifications" />
+    }
+  </div>
+</section>

@@ -70,6 +70,14 @@
 								{{ ui().certifications.viewCredential }}
 							</a>
 						}
+
+						@if (certification.id) {
+							<a
+								class="button button--secondary certifications__credential-link"
+								[routerLink]="['/certifications', certification.id]">
+								{{ ui().buttons.viewDetails }}
+							</a>
+						}
 					</article>
 				}
 			</div>

@@ -36,6 +36,18 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     },
 
+    certificationDetails: {
+      backToCertifications: 'Voltar às Certificações',
+      description: 'Descrição',
+      metadata: { issueDate: 'Data de emissão', expirationDate: 'Data de expiração', credentialId: 'ID da credencial', workload: 'Carga horária', institution: 'Instituição', type: 'Tipo', status: 'Status' },
+      technologies: 'Tecnologias',
+      credential: 'Credencial',
+      institution: 'Instituição',
+      repository: 'Repositório',
+      notFound: 'Certificação não encontrada',
+      requestNotFound: 'Não foi possível localizar a certificação solicitada.'
+    },
+
     buttons: {
 
       viewProjects: 'Ver Projetos',
@@ -122,6 +134,18 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     },
 
+    certificationDetails: {
+      backToCertifications: 'Back to Certifications',
+      description: 'Description',
+      metadata: { issueDate: 'Issue date', expirationDate: 'Expiration date', credentialId: 'Credential ID', workload: 'Workload', institution: 'Institution', type: 'Type', status: 'Status' },
+      technologies: 'Technologies',
+      credential: 'Credential',
+      institution: 'Institution',
+      repository: 'Repository',
+      notFound: 'Certification not found',
+      requestNotFound: 'The requested certification could not be found.'
+    },
+
     buttons: {
 
       viewProjects: 'View Projects',
@@ -206,6 +230,18 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
       viewCredential: 'Ver credencial'
 
+    },
+
+    certificationDetails: {
+      backToCertifications: 'Volver a las Certificaciones',
+      description: 'Descripción',
+      metadata: { issueDate: 'Fecha de emisión', expirationDate: 'Fecha de expiración', credentialId: 'ID de credencial', workload: 'Carga horaria', institution: 'Institución', type: 'Tipo', status: 'Estado' },
+      technologies: 'Tecnologías',
+      credential: 'Credencial',
+      institution: 'Institución',
+      repository: 'Repositorio',
+      notFound: 'Certificación no encontrada',
+      requestNotFound: 'No se pudo encontrar la certificación solicitada.'
     },
 
     buttons: {
