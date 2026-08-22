@@ -2,6 +2,11 @@
   padding-block: var(--space-10);
 }
 
+bp-back-button {
+  display: block;
+  margin-bottom: var(--space-6);
+}
+
 .certification-details__content {
   display: flex;
   flex-direction: column;

@@ -14,7 +14,7 @@ export const routes: Routes = [
     component: ProjectDetails
   },
   {
-    path: 'certifications/:slug',
+    path: 'certifications/:id',
     component: CertificationDetails
   },
   {
