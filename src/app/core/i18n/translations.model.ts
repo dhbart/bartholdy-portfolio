@@ -19,6 +19,12 @@ export interface Translations {
     certifications: string;
   };
 
+  resourceStates: {
+    loading: string;
+    error: string;
+    empty: string;
+  };
+
   certifications: {
     loading: string;
     error: string;

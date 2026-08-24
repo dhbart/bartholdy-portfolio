@@ -4,7 +4,7 @@
 			{{ ui().sections.certifications }}
 		</h2>
 
-		@if (status() === 'loading') {
+		@if (status() === 'loading' || status() === 'reloading') {
 			<p class="certifications__state" aria-live="polite">
 				{{ ui().certifications.loading }}
 			</p>

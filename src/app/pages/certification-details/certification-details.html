@@ -38,7 +38,7 @@
 
         <bp-external-links [links]="externalLinks()" />
       </div>
-    } @else if (status() === 'loading') {
+    } @else if (status() === 'loading' || status() === 'reloading') {
       <bp-loading-state [message]="ui().certifications.loading" />
     } @else {
       <bp-empty-state

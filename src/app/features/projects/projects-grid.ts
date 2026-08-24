@@ -1,40 +1,33 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
-import { LoadingService } from '../../core/services/loading.service';
 import { ProjectResponse } from './project.models';
 import { ProjectService } from './project.service';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
 
 @Component({
   selector: 'bp-projects-grid',
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [RouterLink, NgOptimizedImage, LoadingState],
   templateUrl: './projects-grid.html',
   styleUrl: './projects-grid.scss',
 })
 export class ProjectsGrid {
   private readonly router = inject(Router);
   private readonly projectService = inject(ProjectService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
 
   readonly ui = this.localeService.translations;
-  readonly projects = signal<ProjectResponse[]>([]);
-
-  constructor() {
-    effect((onCleanup) => {
-      const locale = this.localeService.locale();
-      const request = this.loadingService
-        .track(this.projectService.getProjects())
-        .subscribe({
-          next: (projects) => this.projects.set(projects),
-          error: (error) => console.error(`Failed to load Project data for ${locale}.`, error),
-        });
-
-      onCleanup(() => request.unsubscribe());
-    });
-  }
+  readonly projectsResource = resource<ProjectResponse[], string>({
+    params: () => this.localeService.locale(),
+    loader: () => firstValueFrom(this.projectService.getProjects()),
+    defaultValue: [],
+  });
+  readonly projects = this.projectsResource.value;
+  readonly status = this.projectsResource.status;
+  readonly error = this.projectsResource.error;
 
   openProject(slug: string, event: MouseEvent): void {
     if (

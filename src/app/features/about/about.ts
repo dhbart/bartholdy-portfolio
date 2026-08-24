@@ -1,34 +1,28 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
-import { LoadingService } from '../../core/services/loading.service';
 import { AboutResponse } from './about.models';
 import { AboutService } from './about.service';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
 
 
 @Component({
   selector: 'bp-about',
-  imports: [],
+  imports: [LoadingState],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
 export class About {
   private readonly aboutService = inject(AboutService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
 
-  readonly about = signal<AboutResponse | null>(null);
   readonly ui = this.localeService.translations;
-
-  constructor() {
-    effect((onCleanup) => {
-      const locale = this.localeService.locale();
-      const request = this.loadingService.track(this.aboutService.getAbout()).subscribe({
-        next: (about) => this.about.set(about),
-        error: (error) => console.error(`Failed to load About data for ${locale}.`, error),
-      });
-
-      onCleanup(() => request.unsubscribe());
-    });
-  }
+  readonly aboutResource = resource<AboutResponse, string>({
+    params: () => this.localeService.locale(),
+    loader: () => firstValueFrom(this.aboutService.getAbout()),
+  });
+  readonly about = this.aboutResource.value;
+  readonly status = this.aboutResource.status;
+  readonly error = this.aboutResource.error;
 }

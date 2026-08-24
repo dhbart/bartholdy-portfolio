@@ -2,6 +2,13 @@
   <div class="container">
     <h2 class="experience__title section-title">{{ ui().sections.experience }}</h2>
 
+    @if (status() === 'loading' || status() === 'reloading') {
+      <bp-loading-state [message]="ui().resourceStates.loading" />
+    } @else if (status() === 'error') {
+      <p role="alert">{{ ui().resourceStates.error }}</p>
+    } @else if (experiences().length === 0) {
+      <p>{{ ui().resourceStates.empty }}</p>
+    } @else {
     <div class="experience__timeline">
       @for (experience of experiences(); track experience.id) {
         <article class="experience__item card">
@@ -30,5 +37,6 @@
         </article>
       }
     </div>
+    }
   </div>
 </section>

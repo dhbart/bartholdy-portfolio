@@ -2,18 +2,28 @@
 
     <div class="container">
 
+                @if (status() === 'loading' || status() === 'reloading') {
+                    <bp-loading-state [message]="ui().resourceStates.loading" />
+                } @else if (status() === 'error') {
+                    <p role="alert">{{ ui().resourceStates.error }}</p>
+                } @else if (about(); as about) {
+
         <h2 class="about__title section-title">
 
-            {{ about()?.title }}
+                        {{ about.title }}
 
         </h2>
 
         <div class="about__content">
 
-          {{about()?.description}}
+          {{ about.description }}
 
 
         </div>
+
+                } @else {
+                    <p>{{ ui().resourceStates.empty }}</p>
+                }
 
     </div>
 

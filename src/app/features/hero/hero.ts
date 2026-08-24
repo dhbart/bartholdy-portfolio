@@ -1,33 +1,28 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { NgOptimizedImage } from '@angular/common';
 
-import { LoadingService } from '../../core/services/loading.service';
 import { HeroResponse } from './hero.models';
 import { HeroService } from './hero.service';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
 
 @Component({
   selector: 'bp-hero',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, LoadingState],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
 })
 export class Hero {
   private readonly heroService = inject(HeroService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
 
-  readonly hero = signal<HeroResponse | null>(null);
-
-  constructor() {
-    effect((onCleanup) => {
-      const locale = this.localeService.locale();
-      const request = this.loadingService.track(this.heroService.getHero()).subscribe({
-        next: (hero) => this.hero.set(hero),
-        error: (error) => console.error(`Failed to load Hero data for ${locale}.`, error),
-      });
-
-      onCleanup(() => request.unsubscribe());
-    });
-  }
+  readonly ui = this.localeService.translations;
+  readonly heroResource = resource<HeroResponse, string>({
+    params: () => this.localeService.locale(),
+    loader: () => firstValueFrom(this.heroService.getHero()),
+  });
+  readonly hero = this.heroResource.value;
+  readonly status = this.heroResource.status;
+  readonly error = this.heroResource.error;
 }

@@ -1,9 +1,11 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, resource } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom, map } from 'rxjs';
 
 import { LocaleService } from '../../core/i18n/locale.service';
+import { LocaleCode } from '../../core/i18n/locale.types';
 import { SeoService } from '../../core/seo/seo.service';
-import { LoadingService } from '../../core/services/loading.service';
 import { CertificationResponse } from '../../features/certifications/certification.models';
 import { CertificationService } from '../../features/certifications/certification.service';
 import { BackButton } from '../../shared/components/detail/back-button/back-button';
@@ -27,12 +29,39 @@ import { TechnologyBadges } from '../../shared/components/detail/technology-badg
 export class CertificationDetails {
   private readonly route = inject(ActivatedRoute);
   private readonly certificationService = inject(CertificationService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
   private readonly seoService = inject(SeoService);
 
-  readonly certification = signal<CertificationResponse | undefined>(undefined);
-  readonly status = signal<'loading' | 'loaded' | 'error'>('loading');
+  private readonly certificationId = toSignal(
+    this.route.paramMap.pipe(map((params) => params.get('id'))),
+    { initialValue: null },
+  );
+  readonly certificationResource = resource<CertificationResponse, { id: string; locale: LocaleCode }>({
+    params: () => {
+      return { id: this.certificationId() ?? '', locale: this.localeService.locale() };
+    },
+    loader: ({ params }) => {
+      if (!params.id) {
+        return Promise.reject(new Error('No certification id provided'));
+      }
+
+      return firstValueFrom(this.certificationService.getCertification(params.id)).then((certification) => {
+      this.seoService.update({
+        title: `${certification.title} | ${this.ui().seo.certificationTitleSuffix} | Daniel Bartholdy`,
+        description: certification.description ?? certification.title,
+        keywords: this.ui().seo.keywords,
+        image: certification.imageUrl ?? undefined,
+        type: 'article',
+        locale: params.locale,
+        path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
+      });
+      return certification;
+      });
+    },
+  });
+  readonly certification = this.certificationResource.value;
+  readonly status = this.certificationResource.status;
+  readonly error = this.certificationResource.error;
   readonly ui = this.localeService.translations;
 
   readonly metadata = computed<readonly DetailMetadata[]>(() => {
@@ -72,37 +101,4 @@ export class CertificationDetails {
     ];
   });
 
-  constructor() {
-    effect((onCleanup) => {
-      const id = this.route.snapshot.paramMap.get('id');
-      const locale = this.localeService.locale();
-      if (!id) {
-        this.status.set('error');
-        return;
-      }
-
-      this.certification.set(undefined);
-      this.status.set('loading');
-      const request = this.loadingService.track(this.certificationService.getCertification(id)).subscribe({
-        next: (certification) => {
-          this.certification.set(certification);
-          this.status.set('loaded');
-          this.seoService.update({
-            title: `${certification.title} | ${this.ui().seo.certificationTitleSuffix} | Daniel Bartholdy`,
-            description: certification.description ?? certification.title,
-            keywords: this.ui().seo.keywords,
-            image: certification.imageUrl ?? undefined,
-            type: 'article',
-            locale: this.localeService.locale(),
-            path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
-          });
-        },
-        error: (error) => {
-          this.status.set('error');
-          console.error(`Failed to load certification ${id} for ${locale}.`, error);
-        },
-      });
-      onCleanup(() => request.unsubscribe());
-    });
-  }
 }

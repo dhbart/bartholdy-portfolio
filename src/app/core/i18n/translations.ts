@@ -30,6 +30,12 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     },
 
+    resourceStates: {
+      loading: 'Carregando...',
+      error: 'Não foi possível carregar este conteúdo.',
+      empty: 'Nenhum conteúdo disponível.'
+    },
+
     certifications: {
 
       loading: 'Carregando certificações...',
@@ -138,6 +144,12 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     },
 
+    resourceStates: {
+      loading: 'Loading...',
+      error: 'Could not load this content.',
+      empty: 'No content available.'
+    },
+
     certifications: {
 
       loading: 'Loading certifications...',
@@ -244,6 +256,12 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
       certifications: 'Certificaciones'
 
+    },
+
+    resourceStates: {
+      loading: 'Cargando...',
+      error: 'No se pudo cargar este contenido.',
+      empty: 'No hay contenido disponible.'
     },
 
     certifications: {

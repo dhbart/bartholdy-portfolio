@@ -2,44 +2,50 @@
 
     <div class="container">
 
+        @if (status() === 'loading' || status() === 'reloading') {
+            <bp-loading-state [message]="ui().resourceStates.loading" />
+        } @else if (status() === 'error') {
+            <p role="alert">{{ ui().resourceStates.error }}</p>
+        } @else if (hero(); as hero) {
+
         <div class="hero__wrapper">
 
             <div class="hero__content">
 
                 <span class="hero__greeting">
-                    {{ hero()?.greeting }}
+                    {{ hero.greeting }}
                 </span>
 
                 <h1 class="hero__title">
-                    {{ hero()?.name }}
+                    {{ hero.name }}
                 </h1>
 
                 <h2 class="hero__subtitle">
-                    {{ hero()?.title }}
+                    {{ hero.title }}
                 </h2>
 
                 <p class="hero__description">
-                    {{ hero()?.description }}
+                    {{ hero.description }}
                 </p>
 
                 <div class="hero__actions">
 
                     <a
                         class="hero__button button hero__button--primary"
-                        [href]="hero()?.primaryButtonUrl">
+                        [href]="hero.primaryButtonUrl">
 
-                        {{ hero()?.primaryButtonLabel }}
+                        {{ hero.primaryButtonLabel }}
 
                     </a>
 
                     <a
                       class="hero__button button hero__button--secondary"
-                      [href]="hero()?.secondaryButtonUrl"
+                      [href]="hero.secondaryButtonUrl"
                       download="Daniel-Bartholdy-CV.pdf"
                       target="_blank"
                       rel="noopener">
 
-                      {{ hero()?.secondaryButtonLabel }}
+                      {{ hero.secondaryButtonLabel }}
 
                     </a>
 
@@ -63,6 +69,10 @@
             </div>
 
         </div>
+
+        } @else {
+            <p>{{ ui().resourceStates.empty }}</p>
+        }
 
     </div>
 

@@ -1,7 +1,7 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
-import { LoadingService } from '../../core/services/loading.service';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { CertificationResponse } from './certification.models';
 import { CertificationService } from './certification.service';
@@ -23,34 +23,17 @@ const CERTIFICATION_TYPE_EMOJIS: Record<string, string> = {
 })
 export class Certification {
   private readonly certificationService = inject(CertificationService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
 
   readonly ui = this.localeService.translations;
-  readonly certifications = signal<CertificationResponse[]>([]);
-  readonly status = signal<'loading' | 'loaded' | 'error'>('loading');
-
-  constructor() {
-    effect((onCleanup) => {
-      const locale = this.localeService.locale();
-      this.status.set('loading');
-
-      const request = this.loadingService
-        .track(this.certificationService.getCertifications())
-        .subscribe({
-          next: (certifications) => {
-            this.certifications.set(certifications);
-            this.status.set('loaded');
-          },
-          error: (error) => {
-            this.status.set('error');
-            console.error(`Failed to load Certification data for ${locale}.`, error);
-          },
-        });
-
-      onCleanup(() => request.unsubscribe());
-    });
-  }
+  readonly certificationsResource = resource<CertificationResponse[], string>({
+    params: () => this.localeService.locale(),
+    loader: () => firstValueFrom(this.certificationService.getCertifications()),
+    defaultValue: [],
+  });
+  readonly certifications = this.certificationsResource.value;
+  readonly status = this.certificationsResource.status;
+  readonly error = this.certificationsResource.error;
 
   typeEmoji(certificationType: string): string {
     return CERTIFICATION_TYPE_EMOJIS[certificationType.toUpperCase()] ?? '📜';

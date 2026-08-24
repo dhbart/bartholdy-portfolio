@@ -4,6 +4,13 @@
       {{ ui().sections.selectedProjects }}
     </h2>
 
+    @if (status() === 'loading' || status() === 'reloading') {
+      <bp-loading-state [message]="ui().resourceStates.loading" />
+    } @else if (status() === 'error') {
+      <p role="alert">{{ ui().resourceStates.error }}</p>
+    } @else if (projects().length === 0) {
+      <p>{{ ui().resourceStates.empty }}</p>
+    } @else {
     <div class="projects__grid">
       @for (project of projects(); track project.id) {
         <article
@@ -65,5 +72,6 @@
         </article>
       }
     </div>
+    }
   </div>
 </section>

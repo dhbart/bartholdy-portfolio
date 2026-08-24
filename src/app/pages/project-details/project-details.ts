@@ -1,9 +1,11 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, resource } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { firstValueFrom, map } from 'rxjs';
 
-import { LoadingService } from '../../core/services/loading.service';
 import { ProjectResponse } from '../../features/projects/project.models';
 import { ProjectService } from '../../features/projects/project.service';
+import { LocaleCode } from '../../core/i18n/locale.types';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { SeoService } from '../../core/seo/seo.service';
 import { BackButton } from '../../shared/components/detail/back-button/back-button';
@@ -34,12 +36,39 @@ import { TechnologyBadges } from '../../shared/components/detail/technology-badg
 export class ProjectDetails {
   private readonly route = inject(ActivatedRoute);
   private readonly projectService = inject(ProjectService);
-  private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
   private readonly seoService = inject(SeoService);
 
-  readonly project = signal<ProjectResponse | undefined>(undefined);
-  readonly status = signal<'loading' | 'loaded' | 'error'>('loading');
+  private readonly slug = toSignal(
+    this.route.paramMap.pipe(map((params) => params.get('id'))),
+    { initialValue: null },
+  );
+  readonly projectResource = resource<ProjectResponse, { slug: string; locale: LocaleCode }>({
+    params: () => {
+      return { slug: this.slug() ?? '', locale: this.localeService.locale() };
+    },
+    loader: ({ params }) => {
+      if (!params.slug) {
+        return Promise.reject(new Error('No project slug provided'));
+      }
+
+      return firstValueFrom(this.projectService.getProject(params.slug)).then((project) => {
+      this.seoService.update({
+        title: `${project.title} | ${this.ui().seo.projectTitleSuffix} | Daniel Bartholdy`,
+        description: project.description,
+        keywords: this.ui().seo.keywords,
+        image: project.imageUrl,
+        type: 'article',
+        locale: params.locale,
+        path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
+      });
+      return project;
+      });
+    },
+  });
+  readonly project = this.projectResource.value;
+  readonly status = this.projectResource.status;
+  readonly error = this.projectResource.error;
   readonly ui = this.localeService.translations;
   readonly externalLinks = computed<readonly ExternalLink[]>(() => {
     const project = this.project();
@@ -54,43 +83,4 @@ export class ProjectDetails {
     ];
   });
 
-  constructor() {
-    effect((onCleanup) => {
-      const slug = this.route.snapshot.paramMap.get('id');
-      const locale = this.localeService.locale();
-
-      if (!slug) {
-        console.error('No project slug provided');
-        this.status.set('error');
-        return;
-      }
-
-      this.project.set(undefined);
-      this.status.set('loading');
-
-      const request = this.loadingService
-        .track(this.projectService.getProject(slug))
-        .subscribe({
-          next: (project) => {
-            this.project.set(project);
-            this.status.set('loaded');
-            this.seoService.update({
-              title: `${project.title} | ${this.ui().seo.projectTitleSuffix} | Daniel Bartholdy`,
-              description: project.description,
-              keywords: this.ui().seo.keywords,
-              image: project.imageUrl,
-              type: 'article',
-              locale: this.localeService.locale(),
-              path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
-            });
-          },
-          error: (error) => {
-            this.status.set('error');
-            console.error(`Failed to load project ${slug} for ${locale}.`, error);
-          },
-        });
-
-      onCleanup(() => request.unsubscribe());
-    });
-  }
 }

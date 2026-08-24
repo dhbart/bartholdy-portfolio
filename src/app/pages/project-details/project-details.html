@@ -57,7 +57,7 @@
 
             </div>
 
-                } @else if (status() === 'loading') {
+                } @else if (status() === 'loading' || status() === 'reloading') {
                                                         <bp-loading-state message="Loading project..." />
                 } @else {
                             <bp-empty-state

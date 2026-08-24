@@ -7,7 +7,11 @@
             {{ ui().sections.featuredProject }}
 
         </h2>
-          @if (project()) {
+          @if (status() === 'loading' || status() === 'reloading') {
+            <bp-loading-state [message]="ui().resourceStates.loading" />
+          } @else if (status() === 'error') {
+            <p role="alert">{{ ui().resourceStates.error }}</p>
+          } @else if (project()) {
 
             <article class="featured-project__card card"
               role="link"
@@ -50,6 +54,8 @@
 
             </article>
 
+          } @else {
+            <p>{{ ui().resourceStates.empty }}</p>
           }
 
     </div>

@@ -54,7 +54,7 @@ Content lives entirely in `src/app/data/`. To update a section — add a new rol
 
 The Angular API base URL is centralized in the environment files. Local development uses `http://localhost:8080/api/v1` from `src/environments/environment.ts`. Production builds generate the ignored `src/environments/environment.prod.ts` from the `API_URL` environment variable before compiling. `HttpClient` is configured during application bootstrap.
 
-Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`; `LoadingService` provides reusable request tracking for future page integration.
+Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`. HTTP read components use Angular Resource API signals for values, status and errors; locale and route-param signals automatically invalidate and reload those resources.
 
 ## Getting started
 
