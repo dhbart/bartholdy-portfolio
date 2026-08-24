@@ -4,6 +4,7 @@ import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from '../../app.routes';
 import { httpErrorInterceptor } from '../interceptors/http-error.interceptor';
+import { localeHeaderInterceptor } from '../interceptors/locale-header.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +13,9 @@ export const appConfig: ApplicationConfig = {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled'
     })),
-    provideHttpClient(withInterceptors([httpErrorInterceptor]))
+    provideHttpClient(withInterceptors([
+      localeHeaderInterceptor,
+      httpErrorInterceptor
+    ]))
   ]
 };
