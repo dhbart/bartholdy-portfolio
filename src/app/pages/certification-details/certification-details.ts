@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { LocaleService } from '../../core/i18n/locale.service';
+import { SeoService } from '../../core/seo/seo.service';
 import { LoadingService } from '../../core/services/loading.service';
 import { CertificationResponse } from '../../features/certifications/certification.models';
 import { CertificationService } from '../../features/certifications/certification.service';
@@ -28,6 +29,7 @@ export class CertificationDetails {
   private readonly certificationService = inject(CertificationService);
   private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
+  private readonly seoService = inject(SeoService);
 
   readonly certification = signal<CertificationResponse | undefined>(undefined);
   readonly status = signal<'loading' | 'loaded' | 'error'>('loading');
@@ -85,6 +87,15 @@ export class CertificationDetails {
         next: (certification) => {
           this.certification.set(certification);
           this.status.set('loaded');
+          this.seoService.update({
+            title: `${certification.title} | ${this.ui().seo.certificationTitleSuffix} | Daniel Bartholdy`,
+            description: certification.description ?? certification.title,
+            keywords: this.ui().seo.keywords,
+            image: certification.imageUrl ?? undefined,
+            type: 'article',
+            locale: this.localeService.locale(),
+            path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
+          });
         },
         error: (error) => {
           this.status.set('error');

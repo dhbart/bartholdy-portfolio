@@ -5,6 +5,7 @@ import { LoadingService } from '../../core/services/loading.service';
 import { ProjectResponse } from '../../features/projects/project.models';
 import { ProjectService } from '../../features/projects/project.service';
 import { LocaleService } from '../../core/i18n/locale.service';
+import { SeoService } from '../../core/seo/seo.service';
 import { BackButton } from '../../shared/components/detail/back-button/back-button';
 import { DetailHeader } from '../../shared/components/detail/detail-header/detail-header';
 import { EmptyState } from '../../shared/components/detail/empty-state/empty-state';
@@ -35,6 +36,7 @@ export class ProjectDetails {
   private readonly projectService = inject(ProjectService);
   private readonly loadingService = inject(LoadingService);
   private readonly localeService = inject(LocaleService);
+  private readonly seoService = inject(SeoService);
 
   readonly project = signal<ProjectResponse | undefined>(undefined);
   readonly status = signal<'loading' | 'loaded' | 'error'>('loading');
@@ -72,6 +74,15 @@ export class ProjectDetails {
           next: (project) => {
             this.project.set(project);
             this.status.set('loaded');
+            this.seoService.update({
+              title: `${project.title} | ${this.ui().seo.projectTitleSuffix} | Daniel Bartholdy`,
+              description: project.description,
+              keywords: this.ui().seo.keywords,
+              image: project.imageUrl,
+              type: 'article',
+              locale: this.localeService.locale(),
+              path: `/${this.route.snapshot.url.map(segment => segment.path).join('/')}`,
+            });
           },
           error: (error) => {
             this.status.set('error');

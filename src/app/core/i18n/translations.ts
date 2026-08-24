@@ -4,6 +4,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
   'pt-BR': {
 
+    seo: {
+      homeTitle: 'Daniel Bartholdy — Tech Lead e Business Analyst',
+      homeDescription: 'Portfólio de Daniel Bartholdy, Tech Lead, Business Analyst e Product Manager focado em tecnologia, ERP, integrações e produtos digitais.',
+      projectTitleSuffix: 'Projeto',
+      certificationTitleSuffix: 'Certificação',
+      keywords: 'Daniel Bartholdy, Tech Lead, Business Analyst, Product Manager, tecnologia, ERP, integrações',
+      notFoundTitle: 'Página não encontrada',
+      notFoundDescription: 'A página solicitada não existe.'
+    },
+
     sections: {
 
       about: 'Sobre',
@@ -102,6 +112,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
   'en-US': {
 
+    seo: {
+      homeTitle: 'Daniel Bartholdy — Tech Lead & Business Analyst',
+      homeDescription: 'Portfolio of Daniel Bartholdy, Tech Lead, Business Analyst and Product Manager focused on technology, ERP, integrations and digital products.',
+      projectTitleSuffix: 'Project',
+      certificationTitleSuffix: 'Certification',
+      keywords: 'Daniel Bartholdy, Tech Lead, Business Analyst, Product Manager, technology, ERP, integrations',
+      notFoundTitle: 'Page not found',
+      notFoundDescription: 'The requested page does not exist.'
+    },
+
     sections: {
 
       about: 'About',
@@ -199,6 +219,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
   },
 
   'es-ES': {
+
+    seo: {
+      homeTitle: 'Daniel Bartholdy — Tech Lead y Business Analyst',
+      homeDescription: 'Portafolio de Daniel Bartholdy, Tech Lead, Business Analyst y Product Manager enfocado en tecnología, ERP, integraciones y productos digitales.',
+      projectTitleSuffix: 'Proyecto',
+      certificationTitleSuffix: 'Certificación',
+      keywords: 'Daniel Bartholdy, Tech Lead, Business Analyst, Product Manager, tecnología, ERP, integraciones',
+      notFoundTitle: 'Página no encontrada',
+      notFoundDescription: 'La página solicitada no existe.'
+    },
 
     sections: {
 

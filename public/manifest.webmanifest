@@ -1,0 +1,20 @@
+{
+  "name": "Daniel Bartholdy Portfolio",
+  "short_name": "DHBart Portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f3ed",
+  "theme_color": "#f6f3ed",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/assets/images/dhbart-glass-logo.png",
+      "sizes": "50x50",
+      "type": "image/png"
+    }
+  ]
+}

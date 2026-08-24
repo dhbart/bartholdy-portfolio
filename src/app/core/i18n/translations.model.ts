@@ -1,5 +1,15 @@
 export interface Translations {
 
+  seo: {
+    homeTitle: string;
+    homeDescription: string;
+    projectTitleSuffix: string;
+    certificationTitleSuffix: string;
+    keywords: string;
+    notFoundTitle: string;
+    notFoundDescription: string;
+  };
+
   sections: {
     about: string;
     experience: string;

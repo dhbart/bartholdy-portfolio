@@ -7,18 +7,22 @@ import { NotFound } from './pages/not-found/not-found';
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    data: { seo: 'home' }
   },
   {
     path: 'projects/:id',
-    component: ProjectDetails
+    component: ProjectDetails,
+    data: { seo: 'project' }
   },
   {
     path: 'certifications/:id',
-    component: CertificationDetails
+    component: CertificationDetails,
+    data: { seo: 'certification' }
   },
   {
     path: '**',
-    component: NotFound
+    component: NotFound,
+    data: { seo: 'notFound' }
   }
 ];

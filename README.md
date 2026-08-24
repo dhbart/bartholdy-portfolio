@@ -2,7 +2,7 @@
 
 A personal developer portfolio built with **Angular 22**, showcasing professional experience, projects and background. Built as part of a Java + Angular immersion, using it as an opportunity to apply modern Angular concepts end-to-end — standalone components, the new control-flow syntax, and a fully data-driven content architecture.
 
-**Live demo:** _add your deployed URL here_
+**Live demo:** https://bartholdy-portfolio.vercel.app
 **Author:** [Daniel Henrique Bartholdy](https://linkedin.com/in/daniel-bartholdy)
 
 ---
@@ -89,6 +89,8 @@ npm run build
 Compiles the project and outputs production-ready artifacts to `dist/`.
 
 For Vercel, add `API_URL` under Project Settings > Environment Variables with the value `https://portfolio-api-g6au.onrender.com/api/v1`. Vercel then provides it automatically during `npm run build`.
+
+SEO metadata is centralized in `src/app/core/seo/seo.service.ts`. It updates localized titles, descriptions, canonical URLs, Open Graph, Twitter Cards and the document language for every route. `public/robots.txt`, `public/sitemap.xml`, `public/manifest.webmanifest` and `public/favicon.ico` are copied to the production output.
 
 ### Tests
 
