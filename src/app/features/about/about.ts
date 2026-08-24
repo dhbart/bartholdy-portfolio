@@ -5,11 +5,12 @@ import { AboutResponse } from './about.models';
 import { AboutService } from './about.service';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
+import { RevealOnScrollDirective } from '../../shared/components/reveal-on-scroll.directive';
 
 
 @Component({
   selector: 'bp-about',
-  imports: [LoadingState],
+  imports: [LoadingState, RevealOnScrollDirective],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

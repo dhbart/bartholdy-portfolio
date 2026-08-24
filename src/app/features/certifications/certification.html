@@ -1,13 +1,11 @@
-<section class="certifications" id="certifications">
+<section class="certifications" id="certifications" bpRevealOnScroll>
 	<div class="container">
 		<h2 class="certifications__title section-title">
 			{{ ui().sections.certifications }}
 		</h2>
 
 		@if (status() === 'loading' || status() === 'reloading') {
-			<p class="certifications__state" aria-live="polite">
-				{{ ui().certifications.loading }}
-			</p>
+			<bp-loading-state [message]="ui().certifications.loading" />
 		} @else if (status() === 'error') {
 			<p class="certifications__state" role="alert">
 				{{ ui().certifications.error }}

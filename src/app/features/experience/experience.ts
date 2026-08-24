@@ -5,10 +5,11 @@ import { ExperienceResponse } from './experience.models';
 import { ExperienceService } from './experience.service';
 import { LocaleService } from '../../core/i18n/locale.service';
 import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
+import { RevealOnScrollDirective } from '../../shared/components/reveal-on-scroll.directive';
 
 @Component({
   selector: 'bp-experience',
-  imports: [LoadingState],
+  imports: [LoadingState, RevealOnScrollDirective],
   templateUrl: './experience.html',
   styleUrl: './experience.scss',
 })

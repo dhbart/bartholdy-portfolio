@@ -1,3 +1,6 @@
 .loading-state {
-  text-align: center;
+  display: grid;
+  gap: var(--space-3);
+  min-height: 8rem;
+  align-content: center;
 }

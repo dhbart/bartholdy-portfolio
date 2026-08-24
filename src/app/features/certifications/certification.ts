@@ -1,10 +1,12 @@
 import { Component, inject, resource } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { LoadingState } from '../../shared/components/detail/loading-state/loading-state';
 
 import { LocaleService } from '../../core/i18n/locale.service';
 import { CertificationResponse } from './certification.models';
 import { CertificationService } from './certification.service';
+import { RevealOnScrollDirective } from '../../shared/components/reveal-on-scroll.directive';
 
 const CERTIFICATION_TYPE_EMOJIS: Record<string, string> = {
   DEGREE: '🎓',
@@ -17,7 +19,7 @@ const CERTIFICATION_TYPE_EMOJIS: Record<string, string> = {
 
 @Component({
   selector: 'bp-certification',
-  imports: [RouterLink],
+  imports: [RouterLink, LoadingState, RevealOnScrollDirective],
   templateUrl: './certification.html',
   styleUrl: './certification.scss',
 })
