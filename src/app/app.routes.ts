@@ -1,8 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { ProjectDetails } from './pages/project-details/project-details';
-import { CertificationDetails } from './pages/certification-details/certification-details';
-import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
   {
@@ -12,17 +9,17 @@ export const routes: Routes = [
   },
   {
     path: 'projects/:id',
-    component: ProjectDetails,
+    loadComponent: () => import('./pages/project-details/project-details').then((module) => module.ProjectDetails),
     data: { seo: 'project' }
   },
   {
     path: 'certifications/:id',
-    component: CertificationDetails,
+    loadComponent: () => import('./pages/certification-details/certification-details').then((module) => module.CertificationDetails),
     data: { seo: 'certification' }
   },
   {
     path: '**',
-    component: NotFound,
+    loadComponent: () => import('./pages/not-found/not-found').then((module) => module.NotFound),
     data: { seo: 'notFound' }
   }
 ];
