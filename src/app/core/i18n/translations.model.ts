@@ -55,6 +55,11 @@ export interface Translations {
   };
 
   buttons: {
+    home: string;
+    primaryNavigation: string;
+    selectLanguage: string;
+    switchToDarkTheme: string;
+    switchToLightTheme: string;
     viewProjects: string;
     downloadResume: string;
     viewDetails: string;

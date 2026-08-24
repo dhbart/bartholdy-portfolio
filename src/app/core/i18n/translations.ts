@@ -66,6 +66,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     buttons: {
 
+      home: 'Ir para a página inicial',
+
+      primaryNavigation: 'Navegação principal',
+
+      selectLanguage: 'Selecionar idioma',
+
+      switchToDarkTheme: 'Mudar para o tema escuro',
+
+      switchToLightTheme: 'Mudar para o tema claro',
+
       viewProjects: 'Ver Projetos',
 
       downloadResume: 'Baixar Currículo',
@@ -180,6 +190,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
     buttons: {
 
+      home: 'Go to homepage',
+
+      primaryNavigation: 'Primary navigation',
+
+      selectLanguage: 'Select language',
+
+      switchToDarkTheme: 'Switch to dark theme',
+
+      switchToLightTheme: 'Switch to light theme',
+
       viewProjects: 'View Projects',
 
       downloadResume: 'Download Resume',
@@ -293,6 +313,16 @@ export const TRANSLATIONS: Record<string, Translations> = {
     },
 
     buttons: {
+
+      home: 'Ir a la página de inicio',
+
+      primaryNavigation: 'Navegación principal',
+
+      selectLanguage: 'Seleccionar idioma',
+
+      switchToDarkTheme: 'Cambiar al tema oscuro',
+
+      switchToLightTheme: 'Cambiar al tema claro',
 
       viewProjects: 'Ver Proyectos',
 
