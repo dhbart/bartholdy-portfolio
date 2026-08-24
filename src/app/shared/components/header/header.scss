@@ -1,7 +1,3 @@
-.header {
-  background: var(--background);
-  border-bottom: 1px solid var(--border);
-}
 
 :host {
   position: sticky;
@@ -11,7 +7,11 @@
 }
 
 .header {
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
     flex-wrap: wrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
 }
 
 .header__navbar {

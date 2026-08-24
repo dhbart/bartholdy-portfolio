@@ -114,3 +114,20 @@ Based on the base project from the DIO Bootcamp Java + Angular immersion, forked
 
 - **LinkedIn:** [linkedin.com/in/daniel-bartholdy](https://linkedin.com/in/daniel-bartholdy)
 - **GitHub:** [github.com/dhbart](https://github.com/dhbart)
+## Frontend testing strategy
+
+The Angular frontend follows the testing pyramid: fast unit tests for deterministic core behavior, boundary tests for HTTP and interceptors, and a smaller set of component/resource and routing tests for user-visible behavior. Tests assert rendered states, signals, requests, navigation contracts, metadata, and accessibility semantics; they do not snapshot templates or test private implementation details.
+
+Run the test suite with:
+
+```bash
+npm test
+```
+
+Run a production build with:
+
+```bash
+npm run build
+```
+
+HTTP is isolated with Angular's `HttpTestingController`. Internal Angular behavior is left real, allowing `resource()` loading/value/error states, locale-driven refresh, interceptor headers, and component interactions to be exercised as users experience them. Coverage goals are risk-based: every public core service and HTTP boundary is tested, every route contract and critical resource state is covered, and representative components verify internationalization, theme controls, SEO, keyboard operation, focus/accessible names, and error states. Coverage is not pursued by adding tests without user or maintenance value.
