@@ -54,7 +54,7 @@
 						@if (certification.technologies?.length) {
 							<div class="certifications__technologies">
 								@for (technology of certification.technologies; track technology) {
-									<span class="certifications__tag">{{ technology }}</span>
+									<bp-technology-badge [technology]="technologyName(technology)" />
 								}
 							</div>
 						}

@@ -44,9 +44,7 @@
 
                     <div class="featured-project__technologies">
                       @for (technology of project()!.technologies; track technology.id) {
-                        <span class="featured-project__tag">
-                          {{ technology.name }}
-                        </span>
+                        <bp-technology-badge [technology]="technology.name" />
                       }
                     </div>
 

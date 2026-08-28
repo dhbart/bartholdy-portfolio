@@ -43,9 +43,7 @@
                 technology of project.technologies;
                 track technology.id
               ) {
-                <span class="projects__tag">
-                  {{ technology.name }}
-                </span>
+                <bp-technology-badge [technology]="technology.name" />
               }
             </div>
 

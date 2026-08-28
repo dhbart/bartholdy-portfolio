@@ -31,7 +31,7 @@
 
           <div class="experience__technologies">
             @for (technology of experience.technologies; track technology) {
-              <span class="experience__tag">{{ technology }}</span>
+              <bp-technology-badge [technology]="technology" />
             }
           </div>
         </article>

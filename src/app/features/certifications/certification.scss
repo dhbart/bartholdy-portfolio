@@ -53,18 +53,6 @@
 	font-size: var(--font-size-sm);
 }
 
-.certifications__tag {
-	display: inline-flex;
-	align-items: center;
-	padding: .4rem .75rem;
-	border: 1px solid var(--border);
-	border-radius: 999px;
-	background: var(--surface-hover);
-	color: var(--text-primary);
-	font-size: var(--font-size-sm);
-	font-weight: var(--font-medium);
-}
-
 .certifications__credential-link {
 	align-self: flex-start;
 	margin-top: auto;

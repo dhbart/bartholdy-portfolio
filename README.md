@@ -56,7 +56,7 @@ Content lives entirely in `src/app/data/`. To update a section — add a new rol
 
 The Angular API base URL is centralized in the environment files. Local development uses `http://localhost:8080/api/v1` from `src/environments/environment.ts`. Production builds generate the ignored `src/environments/environment.prod.ts` from the `API_URL` environment variable before compiling. `HttpClient` is configured during application bootstrap.
 
-Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`. HTTP read components use Angular Resource API signals for values, status and errors; locale and route-param signals automatically invalidate and reload those resources.
+Technology icon URLs are prepared by the shared technology badge using the backend's root `/icons/technologies/{slug}.svg` asset path. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`. HTTP read components use Angular Resource API signals for values, status and errors; locale and route-param signals automatically invalidate and reload those resources.
 
 The language selector and assistant UI read from the shared `LocaleService` and translation catalog. The selected locale is restored from `localStorage`, and the assistant launcher uses the versioned `src/assets/icons/rubocop.svg` asset.
 
@@ -120,6 +120,8 @@ Based on the base project from the DIO Bootcamp Java + Angular immersion, forked
 
 - **LinkedIn:** [linkedin.com/in/daniel-bartholdy](https://linkedin.com/in/daniel-bartholdy)
 - **GitHub:** [github.com/dhbart](https://github.com/dhbart)
+Technology badges use the shared `TechnologyBadgeComponent`. It accepts only a technology name, resolves supported names through one centralized icon map, and falls back to a text-only badge when no icon is registered or an asset cannot be loaded.
+
 ## Frontend testing strategy
 
 The Angular frontend follows the testing pyramid: fast unit tests for deterministic core behavior, boundary tests for HTTP and interceptors, and a smaller set of component/resource and routing tests for user-visible behavior. Tests assert rendered states, signals, requests, navigation contracts, metadata, and accessibility semantics; they do not snapshot templates or test private implementation details.

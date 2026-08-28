@@ -1,0 +1,11 @@
+<span class="technology-badge">
+  @if (iconUrl() && iconVisible()) {
+    <img
+      class="technology-badge__icon"
+      [src]="iconUrl()!"
+      alt=""
+      aria-hidden="true"
+      (error)="hideIcon()">
+  }
+  <span>{{ technology() }}</span>
+</span>
