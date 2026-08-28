@@ -55,7 +55,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   (click)="$event.stopPropagation()">
-                  GitHub
+                  {{ ui().buttons.github }}
                 </a>
               }
 
@@ -63,7 +63,7 @@
                 class="button button--secondary"
                 [routerLink]="['/projects', project.slug]"
                 (click)="$event.stopPropagation()">
-                View Details →
+                {{ ui().buttons.viewDetails }} →
               </a>
             </div>
           </div>

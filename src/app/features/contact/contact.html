@@ -20,7 +20,7 @@
           </span>
         </div>
 
-        <nav class="contact__links" aria-label="Contact links">
+        <nav class="contact__links" [attr.aria-label]="ui().sections.contact">
           @for (link of contacts()!.links; track link.url) {
 
 

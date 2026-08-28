@@ -1,5 +1,19 @@
 export interface Translations {
 
+  navigation: {
+    label: string;
+    fragment: string;
+  }[];
+
+  notFound: {
+    title: string;
+    message: string;
+  };
+
+  accessibility: {
+    skipToContent: string;
+  };
+
   seo: {
     homeTitle: string;
     homeDescription: string;

@@ -76,6 +76,17 @@ describe('Assistant integration with API', () => {
     expect(panel.style.top).toBe('');
   });
 
+  it('opens an accessible dialog and moves focus into it', async () => {
+    fixture.nativeElement.querySelector('.assistant-launcher').click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const panel = fixture.nativeElement.querySelector('.assistant-panel') as HTMLElement;
+    expect(panel.getAttribute('role')).toBe('dialog');
+    expect(panel.getAttribute('aria-modal')).toBe('true');
+    expect(document.activeElement?.id).toBe('assistant-input');
+  });
+
   it('sends a message through the API and renders the assistant response', async () => {
     fixture.nativeElement.querySelector('.assistant-launcher').click();
     fixture.detectChanges();
@@ -122,6 +133,23 @@ describe('Assistant integration with API', () => {
 
     expect(fixture.nativeElement.querySelector('.assistant-error')?.textContent)
       .toContain('temporariamente indisponível');
+  });
+
+  it('does not render a response after the chat is closed', () => {
+    fixture.nativeElement.querySelector('.assistant-launcher').click();
+    fixture.detectChanges();
+    const input = fixture.nativeElement.querySelector('#assistant-input') as HTMLTextAreaElement;
+    input.value = 'Tell me about Daniel';
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('.assistant-send').click();
+    const request = http.expectOne('/api/v1/assistant/chat');
+
+    (fixture.nativeElement.querySelector('.assistant-icon-button:last-child') as HTMLButtonElement).click();
+    fixture.detectChanges();
+
+    expect(request.cancelled).toBe(true);
+    expect(fixture.nativeElement.querySelector('.assistant-panel')).toBeNull();
   });
 
   it.each([

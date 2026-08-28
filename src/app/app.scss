@@ -7,3 +7,20 @@
 main {
 	flex: 1;
 }
+
+.skip-link {
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	z-index: 1200;
+	padding: .75rem 1rem;
+	transform: translateY(-200%);
+	border-radius: var(--radius-md);
+	background: var(--primary);
+	color: var(--text-on-primary);
+	transition: transform var(--transition-fast);
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}

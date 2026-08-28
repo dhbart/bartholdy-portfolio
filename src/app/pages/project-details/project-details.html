@@ -58,7 +58,7 @@
             </div>
 
                 } @else if (status() === 'loading' || status() === 'reloading') {
-                                                        <bp-loading-state message="Loading project..." />
+                                                        <bp-loading-state [message]="ui().resourceStates.loading" />
                 } @else {
                             <bp-empty-state
                                 [title]="ui().projectDetails.projectNotFound"

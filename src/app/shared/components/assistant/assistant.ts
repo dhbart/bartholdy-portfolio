@@ -1,10 +1,13 @@
 import { DOCUMENT, NgOptimizedImage } from '@angular/common';
 import { Component, DestroyRef, ElementRef, NgZone, Renderer2, effect, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
+import { Subject, takeUntil } from 'rxjs';
 
 import { LocaleService } from '../../../core/i18n/locale.service';
 import { AssistantMessage } from './assistant.models';
 import { AssistantService } from './assistant.service';
+import { AssistantMarkdownRenderer } from './markdown-renderer';
 
 interface ButtonPosition { left: number; top: number; }
 interface PanelPosition { left: number; top: number; }
@@ -18,14 +21,20 @@ interface PanelPosition { left: number; top: number; }
 export class Assistant {
   readonly localeService = inject(LocaleService);
   private readonly assistantService = inject(AssistantService);
+  private readonly markdownRenderer = new AssistantMarkdownRenderer();
   private readonly ngZone = inject(NgZone);
   private readonly renderer = inject(Renderer2);
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly focusTrapFactory = inject(FocusTrapFactory);
   private readonly launcher = viewChild<ElementRef<HTMLButtonElement>>('launcher');
   private readonly panel = viewChild<ElementRef<HTMLElement>>('panel');
   private readonly messageList = viewChild<ElementRef<HTMLElement>>('messageList');
   private readonly input = viewChild<ElementRef<HTMLTextAreaElement>>('input');
+  private focusTrap?: FocusTrap;
+  private readonly cancelRequest = new Subject<void>();
+  private activeRequestId = 0;
+  private readonly inertElements: HTMLElement[] = [];
 
   protected readonly isOpen = signal(false);
   protected readonly isThinking = signal(false);
@@ -49,7 +58,21 @@ export class Assistant {
 
   constructor() {
     effect(() => { this.messages(); queueMicrotask(() => this.scrollToLatest()); });
+    effect(() => {
+      const open = this.isOpen();
+      const panel = this.panel()?.nativeElement;
+      if (open && panel && !this.focusTrap) {
+        this.focusTrap = this.focusTrapFactory.create(panel);
+        this.focusTrap.focusInitialElementWhenReady();
+        this.setBackgroundInert(true);
+      } else if (!open) {
+        this.focusTrap?.destroy();
+        this.focusTrap = undefined;
+        this.setBackgroundInert(false);
+      }
+    });
     this.destroyRef.onDestroy(() => this.stopDragging());
+    this.destroyRef.onDestroy(() => this.cancelPendingRequest());
   }
 
   protected toggleChat(): void {
@@ -59,11 +82,13 @@ export class Assistant {
   }
 
   protected closeChat(): void {
+    this.cancelPendingRequest();
     this.isOpen.set(false);
     queueMicrotask(() => this.launcher()?.nativeElement.focus());
   }
 
   protected clearConversation(): void {
+    this.cancelPendingRequest();
     this.messages.set([]);
     this.error.set(false);
   }
@@ -77,29 +102,19 @@ export class Assistant {
   protected sendMessage(): void {
     const content = this.draft().trim();
     if (!content || this.isThinking()) { return; }
-    console.debug('[Assistant] Sending message', {
-      messageLength: content.length,
-      messagePreview: content.slice(0, 80),
-    });
+    const requestId = ++this.activeRequestId;
     this.messages.update(messages => [...messages, this.createMessage('user', content)]);
     this.draft.set('');
     this.error.set(false);
     this.isThinking.set(true);
-    this.assistantService.chat(content).subscribe({
+    this.assistantService.chat(content).pipe(takeUntil(this.cancelRequest)).subscribe({
       next: response => {
-        console.debug('[Assistant] Response rendered', {
-          responseLength: response.length,
-        });
+        if (requestId !== this.activeRequestId || !this.isOpen()) return;
         this.messages.update(messages => [...messages, this.createMessage('assistant', response)]);
         this.isThinking.set(false);
       },
       error: error => {
-        console.error('[Assistant] Displaying unavailable state', {
-          errorName: error instanceof Error ? error.name : typeof error,
-          errorMessage: error instanceof Error ? error.message : error,
-          status: error?.status,
-          details: error?.details,
-        });
+        if (requestId !== this.activeRequestId) return;
         this.error.set(true);
         this.isThinking.set(false);
       },
@@ -169,25 +184,19 @@ export class Assistant {
   }
 
   protected renderMarkdown(markdown: string): string {
-    let html = this.escapeHtml(markdown).replace(/\x60{3}(\w+)?\n?([\s\S]*?)\x60{3}/g, (_match, language = '', code: string) =>
-      '<pre class="assistant-code"><button type="button" class="assistant-copy" data-code-id="0">' + this.copyLabel() +
-      '</button><code class="language-' + language + '">' + this.highlightCode(code.trimEnd()) + '</code></pre>');
-    html = html
-      .replace(/^### (.+)$/gm, '<h4>$1</h4>').replace(/^## (.+)$/gm, '<h3>$1</h3>').replace(/^# (.+)$/gm, '<h2>$1</h2>')
-      .replace(/^[-*] (.+)$/gm, '<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
-      .replace(/\x60([^\x60\n]+)\x60/g, '<code>$1</code>')
-      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br>');
-    return '<p>' + html + '</p>';
+    return this.markdownRenderer.render(markdown, this.copyLabel());
   }
 
   protected async copyCode(event: MouseEvent): Promise<void> {
     const target = event.target as HTMLElement;
     const code = target.parentElement?.querySelector('code')?.textContent;
     if (target.dataset['codeId'] !== undefined && code && navigator.clipboard) {
-      await navigator.clipboard.writeText(code);
-      target.textContent = this.localeService.translations().assistant.copied;
+      try {
+        await navigator.clipboard.writeText(code);
+        target.textContent = this.localeService.translations().assistant.copied;
+      } catch {
+        this.error.set(true);
+      }
     }
   }
 
@@ -239,15 +248,30 @@ export class Assistant {
 
   private copyLabel(): string { return this.localeService.translations().assistant.copy; }
 
-  private escapeHtml(value: string): string {
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  private cancelPendingRequest(): void {
+    this.activeRequestId++;
+    this.cancelRequest.next();
+    this.isThinking.set(false);
   }
 
-  private highlightCode(code: string): string {
-    return code.replace(/\b(const|let|function|return|class|interface|public|private|new|if|else)\b/g, '<span class="token-keyword">$1</span>')
-      .replace(/(['"])([^'"]*?)\1/g, '<span class="token-string">$1$2$1</span>')
-      .replace(/\b(\d+)\b/g, '<span class="token-number">$1</span>');
+  private setBackgroundInert(inert: boolean): void {
+    if (inert) {
+      const assistantHost = this.launcher()?.nativeElement.closest('bp-assistant');
+      const appRoot = assistantHost?.parentElement;
+      for (const element of Array.from(appRoot?.children ?? [])) {
+        if (element === assistantHost) continue;
+        const htmlElement = element as HTMLElement;
+        htmlElement.setAttribute('inert', '');
+        this.inertElements.push(htmlElement);
+      }
+      return;
+    }
+
+    for (const element of this.inertElements.splice(0)) {
+      element.removeAttribute('inert');
+    }
   }
+
 
   protected readonly launcherStyle = (): { left: string; top: string } | null => {
     const position = this.buttonPosition();

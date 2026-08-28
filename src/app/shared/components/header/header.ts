@@ -1,7 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NavigationData, navigationByLocale } from './navigation.data';
 import { ThemeService } from '../../../core/services/theme.service';
 import { LocaleCode } from '../../../core/i18n/locale.types';
 import { LocaleService } from '../../../core/i18n/locale.service';
@@ -25,14 +24,9 @@ export class Header {
   }
 
 
-  readonly menus = signal<NavigationData[] | null>(null);
+  readonly menus = this.localeService.translations;
 
   constructor(private readonly router: Router) {
-    effect((onCleanup) => {
-      const locale = this.localeService.locale();
-      this.menus.set(navigationByLocale[locale]);
-    });
-
   }
 
   onLogoClick(event: MouseEvent): void {

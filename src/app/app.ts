@@ -19,6 +19,7 @@ export class App {
   private readonly localeService = inject(LocaleService);
   private readonly seoService = inject(SeoService);
   protected readonly title = signal('bartholdy-portfolio');
+  readonly ui = this.localeService.translations;
 
   constructor() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => this.updateRouteSeo());

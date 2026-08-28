@@ -110,7 +110,7 @@ Runs unit tests with Vitest.
 
 - [ ] Add project screenshots / preview images
 - [ ] Deploy and link a live demo
-- [ ] Dark / light theme toggle
+- [x] Dark / light theme toggle
 
 ## Acknowledgments
 

@@ -4,6 +4,17 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
   'pt-BR': {
 
+    navigation: [
+      { label: 'Sobre', fragment: 'about' },
+      { label: 'Projetos', fragment: 'projects' },
+      { label: 'Experiência', fragment: 'experience' },
+      { label: 'Contato', fragment: 'contact' },
+      { label: 'Certificações', fragment: 'certifications' }
+    ],
+
+    notFound: { title: 'Página não encontrada', message: 'A página solicitada não existe.' },
+    accessibility: { skipToContent: 'Pular para o conteúdo' },
+
     seo: {
       homeTitle: 'Daniel Bartholdy — Tech Lead e Business Analyst',
       homeDescription: 'Portfólio de Daniel Bartholdy, Tech Lead, Business Analyst e Product Manager focado em tecnologia, ERP, integrações e produtos digitais.',
@@ -146,6 +157,17 @@ export const TRANSLATIONS: Record<string, Translations> = {
 
   'en-US': {
 
+    navigation: [
+      { label: 'About', fragment: 'about' },
+      { label: 'Projects', fragment: 'projects' },
+      { label: 'Experience', fragment: 'experience' },
+      { label: 'Contact', fragment: 'contact' },
+      { label: 'Certifications', fragment: 'certifications' }
+    ],
+
+    notFound: { title: 'Page not found', message: 'The requested page does not exist.' },
+    accessibility: { skipToContent: 'Skip to content' },
+
     seo: {
       homeTitle: 'Daniel Bartholdy — Tech Lead & Business Analyst',
       homeDescription: 'Portfolio of Daniel Bartholdy, Tech Lead, Business Analyst and Product Manager focused on technology, ERP, integrations and digital products.',
@@ -287,6 +309,17 @@ export const TRANSLATIONS: Record<string, Translations> = {
   },
 
   'es-ES': {
+
+    navigation: [
+      { label: 'Acerca de', fragment: 'about' },
+      { label: 'Proyectos', fragment: 'projects' },
+      { label: 'Experiencia', fragment: 'experience' },
+      { label: 'Contacto', fragment: 'contact' },
+      { label: 'Certificaciones', fragment: 'certifications' }
+    ],
+
+    notFound: { title: 'Página no encontrada', message: 'La página solicitada no existe.' },
+    accessibility: { skipToContent: 'Saltar al contenido' },
 
     seo: {
       homeTitle: 'Daniel Bartholdy — Tech Lead y Business Analyst',

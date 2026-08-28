@@ -1,6 +1,7 @@
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
-import { Component, OnInit } from '@angular/core';
-import { Route, Router, RouterLink } from '@angular/router';
+import { LocaleService } from '../../core/i18n/locale.service';
 
 @Component({
   selector: 'bp-not-found',
@@ -8,10 +9,9 @@ import { Route, Router, RouterLink } from '@angular/router';
   template: `
     <main class="not-found">
       <div class="container">
-        <h1>Page not found</h1>
-        <p>The page you are looking for does not exist.</p>
-        <p>You're being redirected...</p>
-        <a class="button" routerLink="/">Back to Home</a>
+        <h1>{{ ui().notFound.title }}</h1>
+        <p>{{ ui().notFound.message }}</p>
+        <a class="button" routerLink="/">{{ ui().buttons.home }}</a>
       </div>
     </main>
   `,
@@ -28,18 +28,6 @@ import { Route, Router, RouterLink } from '@angular/router';
     }
   `,
 })
-export class NotFound implements OnInit{
-  constructor ( private navigator:Router) {
-
-  }
-
-
-  ngOnInit(): void {
-      setInterval(() => {
-        this.navigator.navigate(['/'])
-      },5000)
-
-  }
+export class NotFound {
+  readonly ui = inject(LocaleService).translations;
 }
-
-

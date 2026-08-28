@@ -3,7 +3,7 @@
   [attr.aria-label]="localeService.translations().assistant.openLabel"
   [attr.aria-expanded]="isOpen()" [title]="localeService.translations().assistant.openLabel"
   (pointerdown)="onLauncherPointerdown($event)" (click)="toggleChat()">
-  <img class="assistant-launcher__icon" ngSrc="/assets/icons/rubocop.svg" width="30" height="30" [attr.alt]="localeService.translations().assistant.iconAlt">
+  <img class="assistant-launcher__icon" ngSrc="/assets/icons/rubocop.svg" width="30" height="30" alt="">
 </button>
 
 @if (isOpen()) {
@@ -14,7 +14,7 @@
       (keydown)="onPanelKeydown($event)">
       <header class="assistant-header" (pointerdown)="onPanelPointerdown($event)">
         <div class="assistant-heading">
-          <img class="assistant-heading__icon" ngSrc="/assets/icons/rubocop.svg" width="28" height="28" [attr.alt]="localeService.translations().assistant.iconAlt">
+          <img class="assistant-heading__icon" ngSrc="/assets/icons/rubocop.svg" width="28" height="28" alt="">
           <div><h2>{{ localeService.translations().assistant.title }}</h2><p><span class="assistant-status-dot" aria-hidden="true">●</span> {{ localeService.translations().assistant.online }}</p></div>
         </div>
         <div class="assistant-header__actions">

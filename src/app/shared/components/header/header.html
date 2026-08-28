@@ -14,15 +14,16 @@
                     ngSrc="/assets/images/dhbart-glass-logo.png"
                     width="50"
                     height="50"
-                    alt="Daniel Bartholdy home">
+                    alt="">
 
             </a>
 
             <ul class="header__menu">
-                @for (item of menus(); track item.route) {
+                @for (item of menus().navigation; track item.fragment) {
                   <li class="header__menu-item">
                     <a class="header__menu-link"
-                       [href]="item.route">
+                       [routerLink]="['/']"
+                       [fragment]="item.fragment">
                       {{ item.label }}
                     </a>
                   </li>
