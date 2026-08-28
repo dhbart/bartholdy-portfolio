@@ -5,11 +5,12 @@ import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
 import { LocaleService } from './core/i18n/locale.service';
 import { SeoService } from './core/seo/seo.service';
+import { Assistant } from './shared/components/assistant/assistant';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Footer],
+  imports: [RouterOutlet, Header, Footer, Assistant],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

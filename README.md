@@ -23,6 +23,8 @@ Rather than hardcoding content into templates, every section of the site — her
 - **Contact** — quick links to email, LinkedIn and GitHub
 - Fully responsive layout
 - Component-based architecture with reusable, typed data models
+- In-memory Daniel AI Assistant with a draggable floating launcher and chat window
+- AI Assistant feedback localized in Portuguese, English, and Spanish, using the RuboCop asset icon
 
 ## Tech stack
 
@@ -56,6 +58,8 @@ The Angular API base URL is centralized in the environment files. Local developm
 
 Technology icon URLs are prepared by `TechnologyService` using `/icons/technologies/{slug}.svg`. HTTP failures are normalized by the global interceptor and `HttpErrorHandlerService`. HTTP read components use Angular Resource API signals for values, status and errors; locale and route-param signals automatically invalidate and reload those resources.
 
+The language selector and assistant UI read from the shared `LocaleService` and translation catalog. The selected locale is restored from `localStorage`, and the assistant launcher uses the versioned `src/assets/icons/rubocop.svg` asset.
+
 ## Getting started
 
 ### Prerequisites
@@ -78,6 +82,8 @@ npm start
 ```
 
 Navigate to `http://localhost:4200/`. The app reloads automatically on file changes.
+
+During local development, Angular proxies /api to http://localhost:8080 through proxy.conf.json. This keeps browser requests same-origin and avoids CORS preflight issues for POST endpoints such as the AI Assistant.
 
 ### Build
 

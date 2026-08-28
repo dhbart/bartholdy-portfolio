@@ -34,6 +34,20 @@ describe('Header', () => {
     expect(select.getAttribute('aria-labelledby')).toBe('language-label');
   });
 
+  it.each([
+    ['pt-BR', '🇧🇷'],
+    ['en-US', '🇺🇸'],
+    ['es-ES', '🇪🇸'],
+  ] as const)('keeps the selector synchronized with the active locale after changes (%s)', (locale, emoji) => {
+    const localeService = TestBed.inject(LocaleService);
+    localeService.setLocale(locale);
+    fixture.detectChanges();
+
+    const select = fixture.nativeElement.querySelector('select') as HTMLSelectElement;
+    expect(select.value).toBe(locale);
+    expect(select.selectedOptions[0].textContent).toContain(emoji);
+  });
+
   it('toggles theme through the keyboard-operable button', () => {
     const button = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
     expect(button.getAttribute('aria-pressed')).toBe('false');

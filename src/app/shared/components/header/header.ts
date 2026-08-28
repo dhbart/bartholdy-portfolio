@@ -17,6 +17,7 @@ export class Header {
   readonly themeService = inject(ThemeService);
 
   readonly localeService = inject(LocaleService);
+  readonly selectedLocale = this.localeService.currentSupportedLocale;
 
   changeLocale(event: Event): void {
     const locale = (event.target as HTMLSelectElement).value as LocaleCode;

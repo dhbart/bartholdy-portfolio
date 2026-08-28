@@ -25,6 +25,24 @@ export interface Translations {
     empty: string;
   };
 
+  assistant: {
+    title: string;
+    iconAlt: string;
+    online: string;
+    openLabel: string;
+    close: string;
+    clear: string;
+    welcome: string;
+    thinking: string;
+    copy: string;
+    copied: string;
+    error: string;
+    inputLabel: string;
+    placeholder: string;
+    send: string;
+    keyboardHint: string;
+  };
+
   certifications: {
     loading: string;
     error: string;

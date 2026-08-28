@@ -36,6 +36,24 @@ export const TRANSLATIONS: Record<string, Translations> = {
       empty: 'Nenhum conteúdo disponível.'
     },
 
+    assistant: {
+      title: 'Assistente de IA do Daniel',
+      iconAlt: 'Ícone do assistente de Daniel',
+      online: 'Online',
+      openLabel: 'Abrir o assistente de IA do Daniel',
+      close: 'Fechar assistente',
+      clear: 'Limpar conversa',
+      welcome: 'Pergunte sobre a experiência, projetos e competências do Daniel.',
+      thinking: 'Daniel está pensando...',
+      copy: 'Copiar',
+      copied: 'Copiado',
+      error: 'Estou temporariamente indisponível. Tente novamente.',
+      inputLabel: 'Mensagem para o assistente',
+      placeholder: 'Digite sua pergunta...',
+      send: 'Enviar mensagem',
+      keyboardHint: 'Enter envia · Shift + Enter faz uma nova linha'
+    },
+
     certifications: {
 
       loading: 'Carregando certificações...',
@@ -160,6 +178,24 @@ export const TRANSLATIONS: Record<string, Translations> = {
       empty: 'No content available.'
     },
 
+    assistant: {
+      title: 'Daniel AI Assistant',
+      iconAlt: "Daniel's assistant icon",
+      online: 'Online',
+      openLabel: "Ask Daniel's AI Assistant",
+      close: 'Close assistant',
+      clear: 'Clear conversation',
+      welcome: "Ask about Daniel's experience, projects and skills.",
+      thinking: 'Daniel is thinking...',
+      copy: 'Copy',
+      copied: 'Copied',
+      error: "I'm temporarily unavailable. Please try again.",
+      inputLabel: 'Message for the assistant',
+      placeholder: 'Type your question...',
+      send: 'Send message',
+      keyboardHint: 'Enter sends · Shift + Enter creates a new line'
+    },
+
     certifications: {
 
       loading: 'Loading certifications...',
@@ -282,6 +318,24 @@ export const TRANSLATIONS: Record<string, Translations> = {
       loading: 'Cargando...',
       error: 'No se pudo cargar este contenido.',
       empty: 'No hay contenido disponible.'
+    },
+
+    assistant: {
+      title: 'Asistente de IA de Daniel',
+      iconAlt: 'Ícono del asistente de Daniel',
+      online: 'En línea',
+      openLabel: 'Abrir el asistente de IA de Daniel',
+      close: 'Cerrar asistente',
+      clear: 'Limpiar conversación',
+      welcome: 'Pregunta sobre la experiencia, los proyectos y las habilidades de Daniel.',
+      thinking: 'Daniel está pensando...',
+      copy: 'Copiar',
+      copied: 'Copiado',
+      error: 'No estoy disponible temporalmente. Inténtalo de nuevo.',
+      inputLabel: 'Mensaje para el asistente',
+      placeholder: 'Escribe tu pregunta...',
+      send: 'Enviar mensaje',
+      keyboardHint: 'Enter envía · Shift + Enter crea una nueva línea'
     },
 
     certifications: {

@@ -35,11 +35,14 @@
                   {{ localeService.translations().buttons.selectLanguage }}
                 </span>
                 <select
-                  [value]="localeService.locale()"
+                  [value]="selectedLocale().code"
                   (change)="changeLocale($event)"
-                  aria-labelledby="language-label">
+                  aria-labelledby="language-label"
+                  [attr.aria-label]="selectedLocale().name">
                   @for (locale of localeService.supportedLocales; track locale.code) {
-                    <option [value]="locale.code">{{ locale.emoji }} {{ locale.name }}</option>
+                    <option [value]="locale.code" [selected]="locale.code === selectedLocale().code">
+                      {{ locale.emoji }} {{ locale.name }}
+                    </option>
                   }
                 </select>
               </label>

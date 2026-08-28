@@ -33,7 +33,7 @@ describe('ApiService and HTTP interceptors', () => {
   it('normalizes the API URL and sends the active locale', () => {
     TestBed.inject(LocaleService).setLocale('es-ES');
     api.get<{ ok: boolean }>('/health').subscribe(result => expect(result.ok).toBe(true));
-    const request = http.expectOne('http://localhost:8080/api/v1/health');
+    const request = http.expectOne('/api/v1/health');
     expect(request.request.headers.get('Accept-Language')).toBe('es-ES');
     expect(request.request.headers.get('Cache-Control')).toBe('no-cache');
     request.flush({ ok: true });
@@ -41,18 +41,18 @@ describe('ApiService and HTTP interceptors', () => {
 
   it('supports POST, PUT, and DELETE through the same API boundary', () => {
     api.post('/items', { name: 'a' }).subscribe();
-    const post = http.expectOne('http://localhost:8080/api/v1/items');
+    const post = http.expectOne('/api/v1/items');
     expect(post.request.method).toBe('POST');
     expect(post.request.body).toEqual({ name: 'a' });
     post.flush({});
 
     api.put('/items/1', { name: 'b' }).subscribe();
-    const put = http.expectOne('http://localhost:8080/api/v1/items/1');
+    const put = http.expectOne('/api/v1/items/1');
     expect(put.request.method).toBe('PUT');
     put.flush({});
 
     api.delete('/items/1').subscribe();
-    const del = http.expectOne('http://localhost:8080/api/v1/items/1');
+    const del = http.expectOne('/api/v1/items/1');
     expect(del.request.method).toBe('DELETE');
     del.flush({});
   });
@@ -60,11 +60,10 @@ describe('ApiService and HTTP interceptors', () => {
   it('maps HTTP errors through the error interceptor', () => {
     let error: unknown;
     api.get('/missing').subscribe({ error: value => error = value });
-    http.expectOne('http://localhost:8080/api/v1/missing').flush(
+    http.expectOne('/api/v1/missing').flush(
       { status: 404, message: 'Not found', path: '/missing' },
       { status: 404, statusText: 'Not Found' },
     );
     expect(error).toMatchObject({ name: 'ApiHttpError', status: 404, message: 'Not found' });
   });
 });
-

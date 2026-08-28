@@ -33,7 +33,7 @@ describe('Hero resource', () => {
 
   it('exposes loading, value, and error states through the rendered UI', async () => {
     expect(fixture.nativeElement.querySelector('bp-loading-state')).not.toBeNull();
-    const request = http.expectOne('http://localhost:8080/api/v1/hero');
+    const request = http.expectOne('/api/v1/hero');
     request.flush({
       id: 1, greeting: 'Hello', name: 'Daniel', title: 'Engineer', description: 'Builds things',
       primaryButtonLabel: 'Projects', primaryButtonUrl: '#projects',
@@ -45,7 +45,7 @@ describe('Hero resource', () => {
 
     const failingFixture = TestBed.createComponent(Hero);
     failingFixture.detectChanges();
-    const failed = http.expectOne('http://localhost:8080/api/v1/hero');
+    const failed = http.expectOne('/api/v1/hero');
     failed.flush({ status: 500, message: 'Server error' }, { status: 500, statusText: 'Error' });
     await failingFixture.whenStable();
     failingFixture.detectChanges();
@@ -53,7 +53,7 @@ describe('Hero resource', () => {
   });
 
   it('refreshes automatically when the locale signal changes', async () => {
-    http.expectOne('http://localhost:8080/api/v1/hero').flush({
+    http.expectOne('/api/v1/hero').flush({
       id: 1, greeting: 'Olá', name: 'Daniel', title: 'Engenheiro', description: 'Constrói',
       primaryButtonLabel: 'Projetos', primaryButtonUrl: '#projects',
       secondaryButtonLabel: 'CV', secondaryButtonUrl: '/cv.pdf',
@@ -62,7 +62,7 @@ describe('Hero resource', () => {
     TestBed.inject(LocaleService).setLocale('en-US');
     TestBed.flushEffects();
     fixture.detectChanges();
-    const refresh = http.expectOne('http://localhost:8080/api/v1/hero');
+    const refresh = http.expectOne('/api/v1/hero');
     expect(refresh.request.headers.get('Accept-Language')).toBe('en-US');
     refresh.flush({
       id: 1, greeting: 'Hello', name: 'Daniel', title: 'Engineer', description: 'Builds',

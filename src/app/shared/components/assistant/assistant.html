@@ -1,0 +1,52 @@
+<button #launcher class="assistant-launcher" type="button"
+  [style.left]="launcherStyle()?.left" [style.top]="launcherStyle()?.top"
+  [attr.aria-label]="localeService.translations().assistant.openLabel"
+  [attr.aria-expanded]="isOpen()" [title]="localeService.translations().assistant.openLabel"
+  (pointerdown)="onLauncherPointerdown($event)" (click)="toggleChat()">
+  <img class="assistant-launcher__icon" ngSrc="/assets/icons/rubocop.svg" width="30" height="30" [attr.alt]="localeService.translations().assistant.iconAlt">
+</button>
+
+@if (isOpen()) {
+  <div class="assistant-backdrop" role="presentation" (click)="onBackdropClick($event)">
+    <section #panel class="assistant-panel" [class.assistant-panel--positioned]="panelPosition() !== null"
+      [style.left]="panelStyle()?.left" [style.top]="panelStyle()?.top" role="dialog" aria-modal="true"
+      [attr.aria-label]="localeService.translations().assistant.title" tabindex="-1"
+      (keydown)="onPanelKeydown($event)">
+      <header class="assistant-header" (pointerdown)="onPanelPointerdown($event)">
+        <div class="assistant-heading">
+          <img class="assistant-heading__icon" ngSrc="/assets/icons/rubocop.svg" width="28" height="28" [attr.alt]="localeService.translations().assistant.iconAlt">
+          <div><h2>{{ localeService.translations().assistant.title }}</h2><p><span class="assistant-status-dot" aria-hidden="true">●</span> {{ localeService.translations().assistant.online }}</p></div>
+        </div>
+        <div class="assistant-header__actions">
+          <button type="button" class="assistant-icon-button" [attr.aria-label]="localeService.translations().assistant.clear" (click)="clearConversation()"><span aria-hidden="true">↺</span></button>
+          <button type="button" class="assistant-icon-button" [attr.aria-label]="localeService.translations().assistant.close" (click)="closeChat()"><span aria-hidden="true">×</span></button>
+        </div>
+      </header>
+
+      <div #messageList class="assistant-messages" aria-live="polite" aria-relevant="additions text">
+        @if (messages().length === 0) { <p class="assistant-empty">{{ localeService.translations().assistant.welcome }}</p> }
+        @for (message of messages(); track message.id) {
+          <article class="assistant-message" [class.assistant-message--user]="message.role === 'user'">
+            <div class="assistant-bubble" (click)="copyCode($event)" [innerHTML]="renderMarkdown(message.content)"></div>
+            <time [attr.datetime]="message.createdAt.toISOString()">{{ formatTime(message.createdAt) }}</time>
+          </article>
+        }
+        @if (isThinking()) {
+          <div class="assistant-thinking" [attr.aria-label]="localeService.translations().assistant.thinking">
+            <span>{{ localeService.translations().assistant.thinking }}</span><i></i><i></i><i></i>
+          </div>
+        }
+        @if (error()) { <p class="assistant-error" role="alert">{{ localeService.translations().assistant.error }}</p> }
+      </div>
+
+      <form class="assistant-composer" (submit)="$event.preventDefault(); sendMessage()">
+        <label class="visually-hidden" for="assistant-input">{{ localeService.translations().assistant.inputLabel }}</label>
+        <textarea #input id="assistant-input" rows="2" [value]="draft()"
+          [placeholder]="localeService.translations().assistant.placeholder" [disabled]="isThinking()"
+          (input)="onDraftInput($any($event.target).value)" (keydown)="onInputKeydown($event)"></textarea>
+        <button type="submit" class="assistant-send" [disabled]="!draft().trim() || isThinking()" [attr.aria-label]="localeService.translations().assistant.send"><span aria-hidden="true">➤</span></button>
+      </form>
+      <p class="assistant-hint">{{ localeService.translations().assistant.keyboardHint }}</p>
+    </section>
+  </div>
+}
