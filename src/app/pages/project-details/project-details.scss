@@ -9,13 +9,24 @@ bp-back-button {
 
 .project-details__wrapper{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
     gap:var(--space-10);
     align-items:start;
+}
+
+.project-details__media,
+.project-details__content {
+    min-width: 0;
 }
 
 .project-details__content{
     display:flex;
     flex-direction:column;
     gap:var(--space-6);
+}
+
+@media (max-width: 720px) {
+    .project-details__wrapper {
+        grid-template-columns: 1fr;
+    }
 }

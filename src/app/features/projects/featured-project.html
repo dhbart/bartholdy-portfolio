@@ -21,12 +21,14 @@
 
 
 
-                <img
-                    class="featured-project__image project-image"
-                    [ngSrc]="project()!.imageUrl"
-                    [alt]="project()!.title"
-                    width="640"
-                    height="360">
+                <div class="featured-project__media">
+                    <img
+                        class="featured-project__image"
+                        [ngSrc]="project()!.imageUrl"
+                        [alt]="project()!.title"
+                        width="640"
+                        height="360">
+                </div>
 
                 <div class="featured-project__content">
 
